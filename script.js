@@ -1,5 +1,5 @@
 // ====== PERSONALIZE THESE ======
-const HER_NAME = "Her Name";
+const HER_NAME = "Clara";
 // ================================
 
 document.getElementById("heroName").textContent = HER_NAME + ".";
