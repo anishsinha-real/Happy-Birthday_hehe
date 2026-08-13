@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#09090b" />
+  <title>A Little Something For You</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="progress"><span></span></div>
+
+  <header class="nav">
+    <div class="brand">for <span id="navName">you</span> <i>♡</i></div>
+    <div class="nav-count"><span id="sectionNo">01</span> / 03</div>
+  </header>
+
+  <main>
+    <section class="hero section" data-section="01">
+      <div class="orb orb-one"></div>
+      <div class="orb orb-two"></div>
+      <div class="orb orb-three"></div>
+      <div class="eyebrow reveal">A LITTLE SOMETHING FOR YOU</div>
+      <h1 class="reveal delay-1">Happy Birthday,<br><em id="heroName">beautiful.</em></h1>
+      <p class="hero-copy reveal delay-2">
+        Today deserves more than a simple birthday wish.
+        So I made you something.
+      </p>
+      
+      <!-- Envelope Animation -->
+      <div class="envelope-container reveal delay-3" id="envelopeContainer">
+        <div class="envelope" id="envelope">
+          <div class="envelope-front"></div>
+          <div class="envelope-back"></div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-letter">
+            <div class="letter-content">
+              <p class="letter-title">✨ A LITTLE SOMETHING FOR YOU ✨</p>
+              <p class="letter-text">I wanted to tell you something special...</p>
+            </div>
+          </div>
+        </div>
+        <button class="scroll-btn open-envelope" id="openEnvelopeBtn">
+          <span>Take a look</span>
+          <span class="arrow">↓</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="words" class="section words" data-section="02">
+      <div class="section-label">02 — A FEW WORDS</div>
+      <div class="words-wrap">
+        <p class="big-line reveal">Some people make ordinary moments feel a little more special.</p>
+        <p class="big-line serif reveal">You somehow do that.</p>
+        <p class="small-line reveal">
+          Maybe you don't realize it, but your smile, your presence,
+          and even the smallest conversations with you have a way of
+          staying around a little longer than they should.
+        </p>
+        <p class="serif final-word reveal">And I really like that. <span>♡</span></p>
+      </div>
+    </section>
+
+    <section class="section video-section" data-section="02">
+      <div class="video-intro reveal">
+        <div class="section-label">A LITTLE MORE</div>
+        <h2>I wanted you to<br><em>see this one.</em></h2>
+        <p>I made this specifically for you.</p>
+      </div>
+
+      <div class="video-card reveal delay-1" id="videoCard">
+        <video id="birthdayVideo" preload="metadata" playsinline controls>
+          <source src="birthday-video.mp4" type="video/mp4">
+          Your browser doesn't support video playback.
+        </video>
+        <div class="video-placeholder" id="videoPlaceholder">
+          <div class="play-ring" id="playButton"><span>▶</span></div>
+          <div class="video-label">YOUR VIDEO</div>
+          <div class="video-hint">Tap to watch</div>
+        </div>
+      </div>
+
+      <button class="continue-btn" data-scroll="#proposal">
+        <span>There's one more thing</span><span>→</span>
+      </button>
+    </section>
+
+    <section id="proposal" class="section proposal" data-section="03">
+      <div class="proposal-glow"></div>
+      <div class="section-label reveal">03 — ONE QUESTION</div>
+      <div class="proposal-content">
+        <p class="reveal">Okay… I had one more thing to say.</p>
+        <h2 class="reveal delay-1">
+          You make my ordinary days<br>
+          <em>feel a little less ordinary.</em>
+        </h2>
+        <p class="proposal-copy reveal delay-2">
+          And I'd really like to make one of those days a date.
+        </p>
+        <div class="question reveal delay-3">
+          <span>So…</span>
+          <strong>Will you go out with me?</strong>
+        </div>
+
+        <div class="answers reveal delay-4">
+          <button class="yes" id="yesBtn">Yes, I will <span>♡</span></button>
+          <button class="maybe" id="maybeBtn">Let me think 👀</button>
+        </div>
+        <p class="tiny-note reveal">No pressure. I just wanted you to know. ♡</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="success" id="success">
+    <div class="confetti" id="confetti"></div>
+    <div class="success-inner">
+      <div class="success-heart">♡</div>
+      <div class="eyebrow">I'M GLAD YOU SAID YES</div>
+      <h2>Then it's a date.</h2>
+      <p>And now I have a very good reason to make your birthday even more special.</p>
+      <button id="closeSuccess">♡ Keep this moment</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
