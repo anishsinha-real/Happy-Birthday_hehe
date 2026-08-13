@@ -23,16 +23,32 @@
     <section class="hero section" data-section="01">
       <div class="orb orb-one"></div>
       <div class="orb orb-two"></div>
+      <div class="orb orb-three"></div>
       <div class="eyebrow reveal">A LITTLE SOMETHING FOR YOU</div>
       <h1 class="reveal delay-1">Happy Birthday,<br><em id="heroName">beautiful.</em></h1>
       <p class="hero-copy reveal delay-2">
         Today deserves more than a simple birthday wish.
         So I made you something.
       </p>
-      <button class="scroll-btn reveal delay-3" data-scroll="#words">
-        <span>Take a look</span>
-        <span class="arrow">↓</span>
-      </button>
+      
+      <!-- Envelope Animation -->
+      <div class="envelope-container reveal delay-3" id="envelopeContainer">
+        <div class="envelope" id="envelope">
+          <div class="envelope-front"></div>
+          <div class="envelope-back"></div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-letter">
+            <div class="letter-content">
+              <p class="letter-title">✨ A LITTLE SOMETHING FOR YOU ✨</p>
+              <p class="letter-text">I wanted to tell you something special...</p>
+            </div>
+          </div>
+        </div>
+        <button class="scroll-btn open-envelope" id="openEnvelopeBtn">
+          <span>Take a look</span>
+          <span class="arrow">↓</span>
+        </button>
+      </div>
     </section>
 
     <section id="words" class="section words" data-section="02">
