@@ -33,17 +33,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* =========================================================
-     MUSIC SYSTEM
+     MUSIC CONFIG
   ========================================================= */
-
-  let musicWasPlayingBeforeVideo = false;
-  let fadeTimer = null;
 
   const MUSIC_VOLUME = 0.45;
   const FADE_DURATION = 1800;
 
+  let fadeTimer = null;
+
+  /*
+    This remembers whether the music was playing immediately
+    before the birthday video started.
+  */
+
+  let musicWasPlayingBeforeVideo = false;
+
+  /*
+    Prevents the autoplay fallback from running repeatedly.
+  */
+
+  let interactionHandled = false;
+
+
+  /* =========================================================
+     INITIAL MUSIC SETUP
+  ========================================================= */
+
   if (music) {
+
     music.volume = 0;
+
+    music.loop = true;
+
+    /*
+      Make sure the browser loads the file quickly.
+    */
+
+    music.preload = 'auto';
+
   }
 
 
@@ -61,7 +88,9 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     soundToggle.textContent =
-      isPlaying ? '♫' : '×';
+      isPlaying
+        ? '♫'
+        : '×';
 
     soundToggle.setAttribute(
       'aria-label',
@@ -76,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ? 'Pause music'
         : 'Play music'
     );
+
   }
 
 
@@ -94,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     music.volume = 0;
 
     updateMusicButton(false);
+
   }
 
 
@@ -110,16 +141,23 @@ document.addEventListener('DOMContentLoaded', () => {
     music.volume = 0;
 
     const steps = 36;
-    const stepTime = FADE_DURATION / steps;
-    const volumeStep = MUSIC_VOLUME / steps;
+
+    const stepTime =
+      FADE_DURATION / steps;
+
+    const volumeStep =
+      MUSIC_VOLUME / steps;
 
     let step = 0;
+
 
     fadeTimer = setInterval(() => {
 
       /*
-        NEVER allow background music to play
-        while the birthday video is playing.
+        VERY IMPORTANT:
+
+        If the birthday video starts while
+        music is fading in, immediately stop it.
       */
 
       if (
@@ -131,23 +169,31 @@ document.addEventListener('DOMContentLoaded', () => {
         stopMusic();
 
         return;
+
       }
+
 
       step++;
 
-      music.volume = Math.min(
-        MUSIC_VOLUME,
-        step * volumeStep
-      );
+
+      music.volume =
+        Math.min(
+          MUSIC_VOLUME,
+          step * volumeStep
+        );
+
 
       if (step >= steps) {
 
         clearInterval(fadeTimer);
 
-        music.volume = MUSIC_VOLUME;
+        music.volume =
+          MUSIC_VOLUME;
+
       }
 
     }, stepTime);
+
   }
 
 
@@ -157,10 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function startMusic() {
 
-    if (!music) return false;
+    if (!music) {
+      return false;
+    }
+
 
     /*
-      Video always has priority.
+      NEVER play background music while
+      birthday video is playing.
     */
 
     if (
@@ -170,18 +220,34 @@ document.addEventListener('DOMContentLoaded', () => {
     ) {
 
       return false;
+
     }
+
 
     try {
 
       clearInterval(fadeTimer);
 
+
+      /*
+        Always begin the fade from zero.
+      */
+
       music.volume = 0;
+
+
+      /*
+        Ask browser to start music.
+      */
 
       await music.play();
 
+
       /*
-        Check again after play().
+        Check again immediately.
+
+        This protects against a race condition where
+        the video starts at the same moment.
       */
 
       if (
@@ -193,60 +259,215 @@ document.addEventListener('DOMContentLoaded', () => {
         stopMusic();
 
         return false;
+
       }
+
+
+      /*
+        Music successfully started.
+      */
 
       updateMusicButton(true);
 
+
+      /*
+        Smooth fade in.
+      */
+
       fadeMusicIn();
+
 
       return true;
 
     } catch (error) {
 
       /*
-        Chrome/Safari may block autoplay with sound.
+        Browser blocked audible autoplay.
+
+        This is normal on Chrome/Safari/Edge when
+        the visitor has not interacted with the page yet.
       */
 
       console.warn(
-        'Autoplay blocked by browser:',
+        'Background music autoplay was blocked:',
         error
       );
 
+
       updateMusicButton(false);
 
+
       return false;
+
     }
+
   }
 
 
   /* =========================================================
-     TRY AUTOPLAY ON PAGE LOAD
+     AUTOPLAY ON PAGE LOAD
   ========================================================= */
 
+  /*
+    Try immediately.
+
+    If the browser allows audible autoplay,
+    music starts automatically.
+  */
+
   startMusic();
+
+
+  /* =========================================================
+     AUTOPLAY FALLBACK
+  ========================================================= */
+
+  /*
+    Modern browsers may block autoplay with sound.
+
+    When that happens, the first real interaction
+    with the website starts the music.
+
+    This means:
+
+      Click anywhere
+          ↓
+      Music starts
+
+    OR
+
+      Tap anywhere
+          ↓
+      Music starts
+
+    OR
+
+      Press a key
+          ↓
+      Music starts
+  */
+
+  async function unlockMusic() {
+
+    if (interactionHandled) {
+      return;
+    }
+
+    interactionHandled = true;
+
+
+    /*
+      Never start music over the birthday video.
+    */
+
+    if (
+      video &&
+      !video.paused &&
+      !video.ended
+    ) {
+
+      return;
+
+    }
+
+
+    /*
+      Only start music if it is currently paused.
+    */
+
+    if (
+      music &&
+      music.paused
+    ) {
+
+      await startMusic();
+
+    }
+
+
+    /*
+      Remove listeners after first interaction.
+    */
+
+    document.removeEventListener(
+      'pointerdown',
+      unlockMusic
+    );
+
+    document.removeEventListener(
+      'keydown',
+      unlockMusic
+    );
+
+    document.removeEventListener(
+      'touchstart',
+      unlockMusic
+    );
+
+  }
+
+
+  /*
+    pointerdown works for mouse and touch.
+  */
+
+  document.addEventListener(
+    'pointerdown',
+    unlockMusic,
+    {
+      passive: true
+    }
+  );
+
+
+  document.addEventListener(
+    'touchstart',
+    unlockMusic,
+    {
+      passive: true
+    }
+  );
+
+
+  document.addEventListener(
+    'keydown',
+    unlockMusic
+  );
 
 
   /* =========================================================
      ENTER BUTTON
   ========================================================= */
 
-  /*
-    The Enter button is a real user interaction,
-    so it is the most reliable autoplay fallback.
-  */
-
   enterBtn?.addEventListener(
     'click',
     async () => {
 
+      /*
+        The Enter button is a guaranteed user gesture.
+
+        Therefore this is the most reliable place
+        to start music if autoplay was blocked.
+      */
+
       if (
         music &&
         music.paused &&
-        (!video || video.paused || video.ended)
+        (
+          !video ||
+          video.paused ||
+          video.ended
+        )
       ) {
 
         await startMusic();
+
       }
+
+
+      /*
+        Scroll to story section.
+      */
 
       document
         .getElementById('story')
@@ -254,7 +475,13 @@ document.addEventListener('DOMContentLoaded', () => {
           behavior: 'smooth'
         });
 
+
+      /*
+        Birthday animation.
+      */
+
       burstHearts(10);
+
     }
   );
 
@@ -267,14 +494,24 @@ document.addEventListener('DOMContentLoaded', () => {
     'click',
     async (event) => {
 
+      /*
+        Prevent the global interaction listener
+        from interfering with this button.
+      */
+
       event.preventDefault();
 
       event.stopPropagation();
 
-      if (!music) return;
+
+      if (!music) {
+        return;
+      }
+
 
       /*
-        Do not allow music while video is playing.
+        Music is completely disabled while
+        birthday video is playing.
       */
 
       if (
@@ -284,10 +521,14 @@ document.addEventListener('DOMContentLoaded', () => {
       ) {
 
         return;
+
       }
 
+
       /*
-        Currently paused → play.
+        MUSIC PAUSED
+        ↓
+        PLAY
       */
 
       if (music.paused) {
@@ -296,14 +537,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       }
 
+
       /*
-        Currently playing → pause.
+        MUSIC PLAYING
+        ↓
+        PAUSE
       */
 
       else {
 
         stopMusic();
+
       }
+
     }
   );
 
@@ -317,8 +563,18 @@ document.addEventListener('DOMContentLoaded', () => {
     () => {
 
       /*
-        Remember whether music was playing BEFORE
-        the video started.
+        Remember whether background music was
+        playing BEFORE the video started.
+
+        Example:
+
+        Music playing
+              ↓
+        Video starts
+              ↓
+        remember = true
+              ↓
+        music stops
       */
 
       musicWasPlayingBeforeVideo =
@@ -330,8 +586,12 @@ document.addEventListener('DOMContentLoaded', () => {
       /*
         HARD STOP.
 
-        The music is completely paused before
-        the video continues playing.
+        No fade.
+
+        No delay.
+
+        Music becomes completely silent
+        immediately.
       */
 
       stopMusic();
@@ -344,6 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
       videoOverlay?.classList.add(
         'hidden'
       );
+
     }
   );
 
@@ -357,9 +618,9 @@ document.addEventListener('DOMContentLoaded', () => {
     async () => {
 
       /*
-        If the video was manually paused,
-        restore music only if it was playing
-        before the video began.
+        If the video was manually paused
+        and music was playing before it,
+        resume the background music.
       */
 
       if (
@@ -368,11 +629,12 @@ document.addEventListener('DOMContentLoaded', () => {
       ) {
 
         await startMusic();
+
       }
 
 
       /*
-        Show overlay again.
+        Show custom overlay again.
       */
 
       if (!video.ended) {
@@ -380,7 +642,9 @@ document.addEventListener('DOMContentLoaded', () => {
         videoOverlay?.classList.remove(
           'hidden'
         );
+
       }
+
     }
   );
 
@@ -393,22 +657,36 @@ document.addEventListener('DOMContentLoaded', () => {
     'ended',
     async () => {
 
+      /*
+        Show overlay again.
+      */
+
       videoOverlay?.classList.remove(
         'hidden'
       );
 
 
       /*
-        Resume music if it was playing
-        before the video.
+        Resume background music only if it
+        was playing before the video.
       */
 
-      if (musicWasPlayingBeforeVideo) {
+      if (
+        musicWasPlayingBeforeVideo
+      ) {
 
         await startMusic();
+
       }
 
-      musicWasPlayingBeforeVideo = false;
+
+      /*
+        Reset state.
+      */
+
+      musicWasPlayingBeforeVideo =
+        false;
+
     }
   );
 
@@ -425,11 +703,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       event.stopPropagation();
 
-      if (!video) return;
+
+      if (!video) {
+        return;
+      }
+
 
       try {
 
         await video.play();
+
 
         videoOverlay?.classList.add(
           'hidden'
@@ -442,17 +725,22 @@ document.addEventListener('DOMContentLoaded', () => {
           error
         );
 
+
         const note =
           videoOverlay?.querySelector(
             'small'
           );
 
+
         if (note) {
 
           note.textContent =
             'Add birthday-video.mp4 to the repository first.';
+
         }
+
       }
+
     }
   );
 
@@ -470,11 +758,14 @@ document.addEventListener('DOMContentLoaded', () => {
           'small'
         );
 
+
       if (note) {
 
         note.textContent =
           'Add birthday-video.mp4 to the repository.';
+
       }
+
     }
   );
 
@@ -483,26 +774,42 @@ document.addEventListener('DOMContentLoaded', () => {
      CINEMATIC STAR FIELD
   ========================================================= */
 
-  for (let i = 0; i < 130; i++) {
+  for (
+    let i = 0;
+    i < 130;
+    i++
+  ) {
 
     const star =
-      document.createElement('span');
+      document.createElement(
+        'span'
+      );
 
-    star.className = 'star';
+
+    star.className =
+      'star';
+
 
     star.style.left =
       `${Math.random() * 100}%`;
 
+
     star.style.top =
       `${Math.random() * 100}%`;
+
 
     star.style.animationDelay =
       `${Math.random() * 4}s`;
 
+
     star.style.opacity =
       `${0.15 + Math.random() * 0.8}`;
 
-    stars?.appendChild(star);
+
+    stars?.appendChild(
+      star
+    );
+
   }
 
 
@@ -513,31 +820,51 @@ document.addEventListener('DOMContentLoaded', () => {
   function createHeart(symbol) {
 
     const heart =
-      document.createElement('span');
+      document.createElement(
+        'span'
+      );
 
-    heart.className = 'heart';
+
+    heart.className =
+      'heart';
+
 
     heart.textContent =
       symbol ||
-      ['♡', '♥', '✦', '✧'][
-        Math.floor(Math.random() * 4)
+      [
+        '♡',
+        '♥',
+        '✦',
+        '✧'
+      ][
+        Math.floor(
+          Math.random() * 4
+        )
       ];
+
 
     heart.style.left =
       `${Math.random() * 100}%`;
 
+
     heart.style.bottom =
       '-30px';
+
 
     heart.style.animationDuration =
       `${5 + Math.random() * 4}s`;
 
-    hearts?.appendChild(heart);
+
+    hearts?.appendChild(
+      heart
+    );
+
 
     setTimeout(
       () => heart.remove(),
       9000
     );
+
   }
 
 
@@ -558,16 +885,21 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(
           entry => {
 
-            if (entry.isIntersecting) {
+            if (
+              entry.isIntersecting
+            ) {
 
               entry.target.classList.add(
                 'visible'
               );
 
+
               observer.unobserve(
                 entry.target
               );
+
             }
+
           }
         );
 
@@ -581,7 +913,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document
     .querySelectorAll('.reveal')
     .forEach(
-      el => observer.observe(el)
+      el =>
+        observer.observe(el)
     );
 
 
@@ -598,10 +931,12 @@ document.addEventListener('DOMContentLoaded', () => {
           'open'
         );
 
+
       letter?.classList.toggle(
         'open',
         isOpen
       );
+
 
       letter?.setAttribute(
         'aria-hidden',
@@ -615,12 +950,14 @@ document.addEventListener('DOMContentLoaded', () => {
           isOpen
             ? '♡ From me to you.'
             : 'Tap the envelope.';
+
       }
 
 
       if (isOpen) {
 
         burstHearts(16);
+
 
         setTimeout(
           () => {
@@ -633,30 +970,40 @@ document.addEventListener('DOMContentLoaded', () => {
           },
           450
         );
+
       }
+
     }
   );
 
 
   /* =========================================================
-     FINAL YES BUTTON
+     YES BUTTON
   ========================================================= */
 
   yesBtn?.addEventListener(
     'click',
     () => {
 
-      if (!answerMessage) return;
+      if (!answerMessage) {
+        return;
+      }
+
 
       answerMessage.textContent =
         'Okay… then I guess I officially have permission to keep falling for you. ♡';
 
+
       burstHearts(34);
+
 
       yesBtn.textContent =
         'Best. Answer. Ever. ♡';
 
-      yesBtn.disabled = true;
+
+      yesBtn.disabled =
+        true;
+
     }
   );
 
@@ -669,12 +1016,17 @@ document.addEventListener('DOMContentLoaded', () => {
     'click',
     () => {
 
-      if (!answerMessage) return;
+      if (!answerMessage) {
+        return;
+      }
+
 
       answerMessage.textContent =
         'Come here then, Boss. 🫂♡ And no, I am NOT letting go first.';
 
+
       burstHearts(22);
+
     }
   );
 
@@ -685,11 +1037,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let clicks = 0;
 
+
   footer?.addEventListener(
     'click',
     () => {
 
       clicks++;
+
 
       if (clicks === 7) {
 
@@ -697,12 +1051,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
           answerMessage.textContent =
             'SECRET UNLOCKED: Boss has officially been declared my favourite person. ☁️♡';
+
         }
+
 
         burstHearts(50);
 
+
         clicks = 0;
+
       }
+
     }
   );
 
@@ -723,7 +1082,9 @@ document.addEventListener('DOMContentLoaded', () => {
         () => createHeart(),
         i * 55
       );
+
     }
+
   }
 
 
@@ -732,12 +1093,19 @@ document.addEventListener('DOMContentLoaded', () => {
   ========================================================= */
 
   /*
-    Don't force the button to "paused" here.
-    startMusic() controls the actual state.
+    Only show paused state if music really is paused.
+
+    If autoplay succeeds, startMusic() has already
+    changed the button to ♫.
   */
 
-  if (music && music.paused) {
+  if (
+    music &&
+    music.paused
+  ) {
+
     updateMusicButton(false);
+
   }
 
 });
