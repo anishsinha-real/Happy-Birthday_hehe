@@ -32,125 +32,82 @@ document.addEventListener('DOMContentLoaded', () => {
   const footer = document.getElementById('footer');
 
 
-  /* =========================================================
-     MUSIC SYSTEM
-  ========================================================= */
+/* =========================================================
+   MUSIC SYSTEM
+========================================================= */
 
-  let musicWasPlayingBeforeVideo = false;
-  let fadeTimer = null;
+let musicWasPlayingBeforeVideo = false;
+let fadeTimer = null;
+let autoplayAttempted = false;
 
-  const MUSIC_VOLUME = 0.45;
-  const FADE_TIME = 1500;
+const MUSIC_VOLUME = 0.45;
+const FADE_TIME = 1800;
 
-  if (music) {
-    music.volume = 0;
+if (music) {
+  music.volume = 0;
+}
+
+function updateMusicButton(playing) {
+
+  if (!soundToggle) return;
+
+  if (playing) {
+
+    soundToggle.classList.add('active');
+
+    soundToggle.textContent = '♫';
+
+    soundToggle.setAttribute(
+      'aria-label',
+      'Pause background music'
+    );
+
+    soundToggle.setAttribute(
+      'title',
+      'Pause music'
+    );
+
+  } else {
+
+    soundToggle.classList.remove('active');
+
+    soundToggle.textContent = '×';
+
+    soundToggle.setAttribute(
+      'aria-label',
+      'Play background music'
+    );
+
+    soundToggle.setAttribute(
+      'title',
+      'Play music'
+    );
   }
+}
 
 
-  function updateMusicButton(playing) {
+/* =========================================================
+   FADE IN
+========================================================= */
 
-    if (!soundToggle) return;
+function fadeMusicIn() {
 
-    if (playing) {
+  if (!music) return;
 
-      soundToggle.classList.add('active');
-      soundToggle.textContent = '♫';
+  clearInterval(fadeTimer);
 
-      soundToggle.setAttribute(
-        'aria-label',
-        'Pause background music'
-      );
+  music.volume = 0;
 
-      soundToggle.setAttribute(
-        'title',
-        'Pause music'
-      );
+  const steps = 30;
+  const interval = FADE_TIME / steps;
+  const volumeStep = MUSIC_VOLUME / steps;
 
-    } else {
+  let step = 0;
 
-      soundToggle.classList.remove('active');
-      soundToggle.textContent = '×';
-
-      soundToggle.setAttribute(
-        'aria-label',
-        'Play background music'
-      );
-
-      soundToggle.setAttribute(
-        'title',
-        'Play music'
-      );
-    }
-  }
-
-
-  /* =========================================================
-     FADE MUSIC IN
-  ========================================================= */
-
-  function fadeMusicIn() {
-
-    if (!music) return;
-
-    clearInterval(fadeTimer);
-
-    music.volume = 0;
-
-    const steps = 30;
-    const interval = FADE_TIME / steps;
-    const volumeStep = MUSIC_VOLUME / steps;
-
-    let step = 0;
-
-    fadeTimer = setInterval(() => {
-
-      /*
-        NEVER increase music while video is playing.
-      */
-
-      if (
-        video &&
-        !video.paused &&
-        !video.ended
-      ) {
-
-        clearInterval(fadeTimer);
-        music.pause();
-        music.volume = 0;
-
-        updateMusicButton(false);
-
-        return;
-      }
-
-      step++;
-
-      music.volume = Math.min(
-        MUSIC_VOLUME,
-        step * volumeStep
-      );
-
-      if (step >= steps) {
-
-        clearInterval(fadeTimer);
-
-        music.volume = MUSIC_VOLUME;
-      }
-
-    }, interval);
-  }
-
-
-  /* =========================================================
-     START MUSIC
-  ========================================================= */
-
-  async function startMusic() {
-
-    if (!music) return false;
+  fadeTimer = setInterval(() => {
 
     /*
-      NEVER start music while video is playing.
+      Never fade music in while the video is playing.
     */
 
     if (
@@ -159,316 +116,292 @@ document.addEventListener('DOMContentLoaded', () => {
       !video.ended
     ) {
 
-      return false;
-    }
-
-    try {
-
       clearInterval(fadeTimer);
 
+      music.pause();
       music.volume = 0;
-
-      await music.play();
-
-      /*
-        Check again after play().
-        This protects against race conditions.
-      */
-
-      if (
-        video &&
-        !video.paused &&
-        !video.ended
-      ) {
-
-        music.pause();
-        music.volume = 0;
-
-        updateMusicButton(false);
-
-        return false;
-      }
-
-      fadeMusicIn();
-
-      updateMusicButton(true);
-
-      return true;
-
-    } catch (error) {
-
-      console.warn(
-        'Music could not start:',
-        error
-      );
 
       updateMusicButton(false);
 
-      return false;
+      return;
     }
+
+    step++;
+
+    music.volume = Math.min(
+      MUSIC_VOLUME,
+      step * volumeStep
+    );
+
+    if (step >= steps) {
+
+      clearInterval(fadeTimer);
+
+      music.volume = MUSIC_VOLUME;
+    }
+
+  }, interval);
+}
+
+
+/* =========================================================
+   START MUSIC
+========================================================= */
+
+async function startMusic() {
+
+  if (!music) return false;
+
+  /*
+    Never start music while birthday video
+    is currently playing.
+  */
+
+  if (
+    video &&
+    !video.paused &&
+    !video.ended
+  ) {
+
+    return false;
   }
 
-
-  /* =========================================================
-     STOP MUSIC
-  ========================================================= */
-
-  function stopMusic() {
-
-    if (!music) return;
+  try {
 
     clearInterval(fadeTimer);
 
-    music.pause();
-
     music.volume = 0;
 
+    await music.play();
+
+    fadeMusicIn();
+
+    updateMusicButton(true);
+
+    return true;
+
+  } catch (error) {
+
+    console.log(
+      'Autoplay blocked by browser.'
+    );
+
     updateMusicButton(false);
+
+    return false;
+  }
+}
+
+
+/* =========================================================
+   AUTOPLAY
+========================================================= */
+
+async function attemptAutoplay() {
+
+  if (autoplayAttempted) return;
+
+  autoplayAttempted = true;
+
+  await startMusic();
+}
+
+
+/*
+  Try immediately when page loads.
+*/
+
+attemptAutoplay();
+
+
+/* =========================================================
+   FIRST USER INTERACTION FALLBACK
+========================================================= */
+
+/*
+  If Chrome blocks autoplay, the first click
+  anywhere on the page starts the music.
+*/
+
+const startMusicOnInteraction = async () => {
+
+  if (
+    music &&
+    music.paused &&
+    (!video || video.paused || video.ended)
+  ) {
+
+    await startMusic();
   }
 
-
-  /* =========================================================
-     MUSIC BUTTON
-  ========================================================= */
-
-  soundToggle?.addEventListener(
+  document.removeEventListener(
     'click',
-    async () => {
-
-      if (!music) return;
-
-      /*
-        Don't allow music while video is playing.
-      */
-
-      if (
-        video &&
-        !video.paused &&
-        !video.ended
-      ) {
-
-        return;
-      }
-
-      if (music.paused) {
-
-        await startMusic();
-
-      } else {
-
-        stopMusic();
-      }
-
-    }
+    startMusicOnInteraction
   );
 
+  document.removeEventListener(
+    'touchstart',
+    startMusicOnInteraction
+  );
 
-  /* =========================================================
-     ENTER BUTTON
-  ========================================================= */
+  document.removeEventListener(
+    'keydown',
+    startMusicOnInteraction
+  );
+};
 
-  enterBtn?.addEventListener(
-    'click',
-    async () => {
 
-      document
-        .getElementById('story')
-        ?.scrollIntoView({
-          behavior: 'smooth'
-        });
+document.addEventListener(
+  'click',
+  startMusicOnInteraction
+);
 
-      burstHearts(10);
+document.addEventListener(
+  'touchstart',
+  startMusicOnInteraction
+);
 
-      /*
-        User interaction allows the browser
-        to start the music.
-      */
+document.addEventListener(
+  'keydown',
+  startMusicOnInteraction
+);
+
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+soundToggle?.addEventListener(
+  'click',
+  async (event) => {
+
+    /*
+      Prevent the global first-interaction
+      handler from doing anything else.
+    */
+
+    event.stopPropagation();
+
+    if (!music) return;
+
+    /*
+      Don't allow music during video.
+    */
+
+    if (
+      video &&
+      !video.paused &&
+      !video.ended
+    ) {
+
+      return;
+    }
+
+    if (music.paused) {
 
       await startMusic();
 
+    } else {
+
+      clearInterval(fadeTimer);
+
+      music.pause();
+
+      music.volume = 0;
+
+      updateMusicButton(false);
     }
-  );
+
+  }
+);
 
 
-  /* =========================================================
-     VIDEO SYSTEM
-  ========================================================= */
+/* =========================================================
+   VIDEO START
+========================================================= */
+
+video?.addEventListener(
+  'play',
+  () => {
+
+    /*
+      Remember whether music was playing.
+    */
+
+    musicWasPlayingBeforeVideo =
+      music
+        ? !music.paused
+        : false;
 
 
-  /*
-    VIDEO STARTS
-    -----------------------------
-    HARD STOP MUSIC IMMEDIATELY
-  */
+    /*
+      HARD STOP MUSIC.
+    */
 
-  video?.addEventListener(
-    'play',
-    () => {
+    if (music) {
 
-      /*
-        Remember whether music was playing
-        BEFORE the video started.
-      */
+      clearInterval(fadeTimer);
 
-      musicWasPlayingBeforeVideo =
-        music
-          ? !music.paused
-          : false;
+      music.pause();
 
+      music.volume = 0;
 
-      /*
-        STOP MUSIC IMMEDIATELY.
-      */
-
-      if (music) {
-
-        clearInterval(fadeTimer);
-
-        music.pause();
-
-        music.volume = 0;
-
-        updateMusicButton(false);
-      }
-
-
-      /*
-        Hide video overlay.
-      */
-
-      videoOverlay?.classList.add(
-        'hidden'
-      );
-
+      updateMusicButton(false);
     }
-  );
+
+    videoOverlay?.classList.add(
+      'hidden'
+    );
+  }
+);
 
 
-  /*
-    VIDEO PAUSES
-    -----------------------------
-    Resume music only if it was
-    playing before the video.
-  */
+/* =========================================================
+   VIDEO PAUSE
+========================================================= */
 
-  video?.addEventListener(
-    'pause',
-    async () => {
+video?.addEventListener(
+  'pause',
+  async () => {
 
-      /*
-        Don't resume here if the video
-        has actually finished.
-      */
+    if (
+      !video.ended &&
+      musicWasPlayingBeforeVideo
+    ) {
 
-      if (
-        !video.ended &&
-        musicWasPlayingBeforeVideo
-      ) {
-
-        await startMusic();
-      }
-
-
-      if (!video.ended) {
-
-        videoOverlay?.classList.remove(
-          'hidden'
-        );
-      }
-
+      await startMusic();
     }
-  );
 
-
-  /*
-    VIDEO ENDS
-    -----------------------------
-    Resume music.
-  */
-
-  video?.addEventListener(
-    'ended',
-    async () => {
+    if (!video.ended) {
 
       videoOverlay?.classList.remove(
         'hidden'
       );
-
-
-      if (musicWasPlayingBeforeVideo) {
-
-        await startMusic();
-      }
-
-
-      musicWasPlayingBeforeVideo = false;
-
     }
-  );
+  }
+);
 
 
-  /*
-    VIDEO PLAY BUTTON
-  */
+/* =========================================================
+   VIDEO END
+========================================================= */
 
-  videoPlay?.addEventListener(
-    'click',
-    async () => {
+video?.addEventListener(
+  'ended',
+  async () => {
 
-      try {
+    videoOverlay?.classList.remove(
+      'hidden'
+    );
 
-        await video.play();
+    if (musicWasPlayingBeforeVideo) {
 
-        videoOverlay?.classList.add(
-          'hidden'
-        );
-
-      } catch (error) {
-
-        console.warn(
-          'Video could not start:',
-          error
-        );
-
-        const note =
-          videoOverlay?.querySelector(
-            'small'
-          );
-
-        if (note) {
-
-          note.textContent =
-            'Add birthday-video.mp4 to the repository first.';
-        }
-
-      }
-
+      await startMusic();
     }
-  );
 
-
-  /*
-    VIDEO ERROR
-  */
-
-  video?.addEventListener(
-    'error',
-    () => {
-
-      const note =
-        videoOverlay?.querySelector(
-          'small'
-        );
-
-      if (note) {
-
-        note.textContent =
-          'Add birthday-video.mp4 to the repository.';
-      }
-
-    }
-  );
-
+    musicWasPlayingBeforeVideo = false;
+  }
+);
 
   /* =========================================================
      CINEMATIC STAR FIELD
