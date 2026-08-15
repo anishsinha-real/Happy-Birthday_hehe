@@ -73,28 +73,24 @@
        MUSIC
   ====================================================== -->
 
-  <button
-    class="sound-toggle"
-    id="soundToggle"
-    type="button"
-    aria-label="Play background music"
-    title="Play music"
-  >
-    ×
-  </button>
+<button
+  class="sound-toggle"
+  id="soundToggle"
+  type="button"
+  aria-label="Pause background music"
+  title="Pause music"
+>
+  ♫
+</button>
 
-  <audio
-    id="bgMusic"
-    loop
-    preload="auto"
-  >
-    <source
-      src="music.mp3"
-      type="audio/mpeg"
-    >
-
-    Your browser does not support audio.
-  </audio>
+<audio
+  id="bgMusic"
+  loop
+  preload="auto"
+  autoplay
+>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 
   <!-- =====================================================
