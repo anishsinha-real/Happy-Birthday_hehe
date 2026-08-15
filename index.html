@@ -1,130 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#09090b" />
-  <title>A Little Something For You</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff1493">
+  <title>A Special Day For You 💕</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="noise"></div>
-  <div class="progress"><span></span></div>
-
-  <header class="nav">
-    <div class="brand">for <span id="navName">you</span> <i>♡</i></div>
-    <div class="nav-count"><span id="sectionNo">01</span> / 03</div>
+  <div class="background-gradient"></div>
+  <div class="floating-emojis" id="floatingEmojis"></div>
+  
+  <header class="header">
+    <div class="header-content">
+      <h1 class="title">✨ Happy Birthday <span id="personName">You</span> ✨</h1>
+      <p class="subtitle">Something special for someone special</p>
+    </div>
   </header>
 
-  <main>
-    <section class="hero section" data-section="01">
-      <div class="orb orb-one"></div>
-      <div class="orb orb-two"></div>
-      <div class="orb orb-three"></div>
-      <div class="eyebrow reveal">A LITTLE SOMETHING FOR YOU</div>
-      <h1 class="reveal delay-1">Happy Birthday,<br><em id="heroName">beautiful.</em></h1>
-      <p class="hero-copy reveal delay-2">
-        Today deserves more than a simple birthday wish.
-        So I made you something.
-      </p>
+  <main class="container">
+    <!-- SECTION 1: Welcome -->
+    <section class="section welcome-section">
+      <div class="confetti-burst" id="confettiBurst"></div>
       
-      <!-- Envelope Animation -->
-      <div class="envelope-container reveal delay-3" id="envelopeContainer">
-        <div class="envelope" id="envelope">
-          <div class="envelope-front"></div>
-          <div class="envelope-back"></div>
-          <div class="envelope-flap"></div>
-          <div class="envelope-letter">
-            <div class="letter-content">
-              <p class="letter-title">✨ A LITTLE SOMETHING FOR YOU ✨</p>
-              <p class="letter-text">I wanted to tell you something special...</p>
+      <div class="welcome-card">
+        <div class="emoji-large">🎂</div>
+        <h2 class="section-title">Happy Birthday!</h2>
+        <p class="section-text">
+          Today is your special day, and I wanted to make something just for you. 
+          Something that shows how much you mean to me. ✨
+        </p>
+        <p class="section-text">
+          So I put together this little digital surprise with memories, fun surprises, and something I've been wanting to say for a while...
+        </p>
+        
+        <div class="envelope-wrapper">
+          <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body"></div>
+            <div class="envelope-letter">
+              <div class="letter">
+                <p class="letter-header">💌 A Special Message 💌</p>
+                <p class="letter-line">Dear you,</p>
+                <p class="letter-line">
+                  I wanted to tell you something. You make ordinary moments feel magical. 
+                  Your laugh, your kindness, the way you light up when you're excited... 
+                  it all matters so much more than you probably realize.
+                </p>
+                <p class="letter-line">
+                  On your birthday, I wanted you to know just how special you are to me. 💕
+                </p>
+                <p class="letter-signature">With love,<br>Someone who cares 💜</p>
+              </div>
             </div>
           </div>
+          <button class="envelope-btn" id="envelopeBtn">💌 Open the Letter 💌</button>
         </div>
-        <button class="scroll-btn open-envelope" id="openEnvelopeBtn">
-          <span>Take a look</span>
-          <span class="arrow">↓</span>
-        </button>
       </div>
     </section>
 
-    <section id="words" class="section words" data-section="02">
-      <div class="section-label">02 — A FEW WORDS</div>
-      <div class="words-wrap">
-        <p class="big-line reveal">Some people make ordinary moments feel a little more special.</p>
-        <p class="big-line serif reveal">You somehow do that.</p>
-        <p class="small-line reveal">
-          Maybe you don't realize it, but your smile, your presence,
-          and even the smallest conversations with you have a way of
-          staying around a little longer than they should.
+    <!-- SECTION 2: Fun Facts & Memories -->
+    <section class="section memories-section">
+      <h2 class="section-title">🌟 Fun Facts About You 🌟</h2>
+      
+      <div class="fun-facts">
+        <div class="fact-card">
+          <div class="fact-emoji">😊</div>
+          <p class="fact-text">Your smile is contagious in the best way</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-emoji">💭</div>
+          <p class="fact-text">You're deeper than you think you are</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-emoji">🎨</div>
+          <p class="fact-text">You add color to my world</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-emoji">⭐</div>
+          <p class="fact-text">You deserve more recognition than you get</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-emoji">🎵</div>
+          <p class="fact-text">You make the mundane feel musical</p>
+        </div>
+        <div class="fact-card">
+          <div class="fact-emoji">💎</div>
+          <p class="fact-text">You're a rare gem and don't let anyone tell you otherwise</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Quick Fun Quiz -->
+    <section class="section quiz-section">
+      <h2 class="section-title">🎮 Quick Fun Quiz! 🎮</h2>
+      <p class="quiz-subtitle">Answer these about yourself (no wrong answers!)</p>
+      
+      <div class="quiz-container">
+        <div class="quiz-question">
+          <p class="question-text">What's your vibe right now?</p>
+          <div class="question-options">
+            <button class="quiz-option" data-answer="sunshine">☀️ Sunshine & Vibes</button>
+            <button class="quiz-option" data-answer="cozy">🌙 Cozy & Chill</button>
+            <button class="quiz-option" data-answer="adventure">🚀 Adventure Ready</button>
+            <button class="quiz-option" data-answer="party">🎉 Party Mode</button>
+          </div>
+        </div>
+
+        <div class="quiz-question" style="display:none;">
+          <p class="question-text">What makes you happiest?</p>
+          <div class="question-options">
+            <button class="quiz-option" data-answer="people">👥 Time with people I love</button>
+            <button class="quiz-option" data-answer="create">🎨 Creating something new</button>
+            <button class="quiz-option" data-answer="nature">🌿 Nature & peace</button>
+            <button class="quiz-option" data-answer="learn">📚 Learning something cool</button>
+          </div>
+        </div>
+
+        <div class="quiz-question" style="display:none;">
+          <p class="question-text">How would you describe yourself?</p>
+          <div class="question-options">
+            <button class="quiz-option" data-answer="thoughtful">💭 Thoughtful & deep</button>
+            <button class="quiz-option" data-answer="funny">😄 Funny & witty</button>
+            <button class="quiz-option" data-answer="kind">💕 Kind & caring</button>
+            <button class="quiz-option" data-answer="unique">✨ Unique & different</button>
+          </div>
+        </div>
+
+        <div class="quiz-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+          </div>
+          <p id="progressText" class="progress-text">Question 1 of 3</p>
+        </div>
+
+        <button class="next-btn" id="nextBtn" style="display:none;">Next Question →</button>
+      </div>
+    </section>
+
+    <!-- SECTION 4: The Big Question -->
+    <section class="section proposal-section">
+      <div class="proposal-card">
+        <div class="heart-animation">💕</div>
+        
+        <h2 class="section-title">One More Thing...</h2>
+        
+        <div class="proposal-message">
+          <p class="proposal-text">
+            I know this might come as a surprise, but I've been thinking about this for a while.
+          </p>
+          
+          <p class="proposal-text">
+            You make me want to be better. You make ordinary days feel special. 
+            And I really, really like spending time with you.
+          </p>
+          
+          <p class="proposal-text bold">
+            So... will you go out with me? 🥺💕
+          </p>
+        </div>
+
+        <div class="proposal-buttons">
+          <button class="btn btn-yes" id="yesBtn">Yes! 💕 Let's go!</button>
+          <button class="btn btn-think" id="thinkBtn">Hmm... 👀 Let me think</button>
+        </div>
+
+        <p class="proposal-note">No pressure at all! I just wanted you to know. 💜</p>
+      </div>
+    </section>
+
+    <!-- SUCCESS MESSAGE -->
+    <section class="section success-section" id="successSection" style="display:none;">
+      <div class="success-card">
+        <div class="success-emoji">🎉</div>
+        <h2>That's amazing!</h2>
+        <p class="success-text">
+          I'm so happy right now! 💕
         </p>
-        <p class="serif final-word reveal">And I really like that. <span>♡</span></p>
-      </div>
-    </section>
-
-    <section class="section video-section" data-section="02">
-      <div class="video-intro reveal">
-        <div class="section-label">A LITTLE MORE</div>
-        <h2>I wanted you to<br><em>see this one.</em></h2>
-        <p>I made this specifically for you.</p>
-      </div>
-
-      <div class="video-card reveal delay-1" id="videoCard">
-        <video id="birthdayVideo" preload="metadata" playsinline controls>
-          <source src="birthday-video.mp4" type="video/mp4">
-          Your browser doesn't support video playback.
-        </video>
-        <div class="video-placeholder" id="videoPlaceholder">
-          <div class="play-ring" id="playButton"><span>▶</span></div>
-          <div class="video-label">YOUR VIDEO</div>
-          <div class="video-hint">Tap to watch</div>
-        </div>
-      </div>
-
-      <button class="continue-btn" data-scroll="#proposal">
-        <span>There's one more thing</span><span>→</span>
-      </button>
-    </section>
-
-    <section id="proposal" class="section proposal" data-section="03">
-      <div class="proposal-glow"></div>
-      <div class="section-label reveal">03 — ONE QUESTION</div>
-      <div class="proposal-content">
-        <p class="reveal">Okay… I had one more thing to say.</p>
-        <h2 class="reveal delay-1">
-          You make my ordinary days<br>
-          <em>feel a little less ordinary.</em>
-        </h2>
-        <p class="proposal-copy reveal delay-2">
-          And I'd really like to make one of those days a date.
+        <p class="success-text">
+          You just made this the best birthday ever. Let's make more amazing memories together! 🌟
         </p>
-        <div class="question reveal delay-3">
-          <span>So…</span>
-          <strong>Will you go out with me?</strong>
-        </div>
+        <button class="btn btn-primary" onclick="window.location.reload()">✨ See it Again ✨</button>
+      </div>
+    </section>
 
-        <div class="answers reveal delay-4">
-          <button class="yes" id="yesBtn">Yes, I will <span>♡</span></button>
-          <button class="maybe" id="maybeBtn">Let me think 👀</button>
-        </div>
-        <p class="tiny-note reveal">No pressure. I just wanted you to know. ♡</p>
+    <!-- THINKING MESSAGE -->
+    <section class="section thinking-section" id="thinkingSection" style="display:none;">
+      <div class="thinking-card">
+        <div class="thinking-emoji">🤔</div>
+        <h2>Take your time!</h2>
+        <p class="thinking-text">
+          I'm not going anywhere. Whenever you're ready, I'll be here. 💜
+        </p>
+        <p class="thinking-text">
+          But just so you know... I meant every word. ✨
+        </p>
+        <button class="btn btn-primary" onclick="window.location.reload()">✨ Start Over ✨</button>
       </div>
     </section>
   </main>
 
-  <div class="success" id="success">
-    <div class="confetti" id="confetti"></div>
-    <div class="success-inner">
-      <div class="success-heart">♡</div>
-      <div class="eyebrow">I'M GLAD YOU SAID YES</div>
-      <h2>Then it's a date.</h2>
-      <p>And now I have a very good reason to make your birthday even more special.</p>
-      <button id="closeSuccess">♡ Keep this moment</button>
-    </div>
-  </div>
+  <footer class="footer">
+    <p>Made with 💕 just for you</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
