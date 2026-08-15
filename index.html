@@ -17,10 +17,7 @@
   <div class="hearts" id="hearts"></div>
 
   <button class="sound-toggle" id="soundToggle" aria-label="Toggle music">♫</button>
-  <audio id="bgMusic" loop preload="none">
-    <!-- Add your own music file as music.mp3 in the repo. -->
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bgMusic" loop preload="none"><source src="music.mp3" type="audio/mpeg"></audio>
 
   <main>
     <section class="hero" id="home">
@@ -33,39 +30,16 @@
     </section>
 
     <section class="section story" id="story">
-      <div class="section-heading reveal">
-        <span class="section-number">01</span>
-        <h2>And somehow, it started with a game.</h2>
-        <p>Sky brought two people together who probably had no idea what was coming.</p>
-      </div>
-
+      <div class="section-heading reveal"><span class="section-number">01</span><h2>And somehow, it started with a game.</h2><p>Sky brought two people together who probably had no idea what was coming.</p></div>
       <div class="story-grid">
-        <article class="story-card large reveal">
-          <span class="card-icon">☁</span>
-          <p class="tiny-label">THE BEGINNING</p>
-          <h3>One game.<br>Two idiots.<br>Way too many emotes.</h3>
-          <p>We met through <em>Sky</em>. And honestly, one of my favourite memories is how we'd just spam emotes at each other like that was a perfectly normal way to communicate.</p>
-        </article>
-        <article class="story-card reveal delay-1">
-          <span class="card-icon">♡</span>
-          <p class="tiny-label">THE FUNNY PART</p>
-          <h3>I still don't have a reason.</h3>
-          <p>There isn't some dramatic explanation. No checklist. No grand moment. I just… ended up caring about you a lot.</p>
-        </article>
-        <article class="story-card accent reveal delay-2">
-          <span class="card-icon">✦</span>
-          <p class="tiny-label">THE LITTLE THING</p>
-          <h3>Maybe that's the point.</h3>
-          <p>Sometimes you don't fall for a reason. You just notice that someone has quietly become your favourite part of the day.</p>
-        </article>
+        <article class="story-card large reveal"><span class="card-icon">☁</span><p class="tiny-label">THE BEGINNING</p><h3>One game.<br>Two idiots.<br>Way too many emotes.</h3><p>We met through <em>Sky</em>. And honestly, one of my favourite memories is how we'd just spam emotes at each other like that was a perfectly normal way to communicate.</p></article>
+        <article class="story-card reveal delay-1"><span class="card-icon">♡</span><p class="tiny-label">THE FUNNY PART</p><h3>I still don't have a reason.</h3><p>There isn't some dramatic explanation. No checklist. No grand moment. I just… ended up caring about you a lot.</p></article>
+        <article class="story-card accent reveal delay-2"><span class="card-icon">✦</span><p class="tiny-label">THE LITTLE THING</p><h3>Maybe that's the point.</h3><p>Sometimes you don't fall for a reason. You just notice that someone has quietly become your favourite part of the day.</p></article>
       </div>
     </section>
 
     <section class="section memories" id="memories">
-      <div class="section-heading centered reveal">
-        <span class="section-number">02</span>
-        <h2>A few things I want you to know.</h2>
-      </div>
+      <div class="section-heading centered reveal"><span class="section-number">02</span><h2>A few things I want you to know.</h2></div>
       <div class="memory-grid">
         <div class="memory-frame reveal"><div class="photo-placeholder"><span>PHOTO 01</span><small>your favourite Sky memory</small></div></div>
         <div class="memory-note reveal delay-1"><span>✎</span><p>"The way we spammed emotes onto each other"</p><small>— one of the memories I keep coming back to</small></div>
@@ -76,38 +50,13 @@
     </section>
 
     <section class="section video" id="video">
-      <div class="section-heading centered reveal">
-        <span class="section-number">03</span>
-        <h2>Something I made for you.</h2>
-        <p>Put your birthday video in the repo as <code>birthday-video.mp4</code>.</p>
-      </div>
-      <div class="video-card reveal">
-        <video id="birthdayVideo" controls playsinline poster="">
-          <source src="birthday-video.mp4" type="video/mp4">
-          Your browser doesn't support this video.
-        </video>
-        <div class="video-overlay" id="videoOverlay">
-          <button id="videoPlay" class="play-btn">▶</button>
-          <p>your special message</p>
-          <small>birthday-video.mp4</small>
-        </div>
-      </div>
+      <div class="section-heading centered reveal"><span class="section-number">03</span><h2>Something I made for you.</h2><p>Put your birthday video in the repo as <code>birthday-video.mp4</code>.</p></div>
+      <div class="video-card reveal"><video id="birthdayVideo" controls playsinline poster=""><source src="birthday-video.mp4" type="video/mp4">Your browser doesn't support this video.</video><div class="video-overlay" id="videoOverlay"><button id="videoPlay" class="play-btn">▶</button><p>your special message</p><small>birthday-video.mp4</small></div></div>
     </section>
 
     <section class="section letter-section" id="letter">
-      <div class="section-heading centered reveal">
-        <span class="section-number">04</span>
-        <h2>I wrote this instead of trying to say it normally.</h2>
-      </div>
-      <div class="envelope-wrap reveal delay-1">
-        <button class="envelope" id="envelope" aria-label="Open letter">
-          <div class="envelope-back"></div>
-          <div class="envelope-flap"></div>
-          <div class="seal">♡</div>
-          <div class="envelope-label">For Boss</div>
-        </button>
-        <p id="envelopeHint">Tap the envelope.</p>
-      </div>
+      <div class="section-heading centered reveal"><span class="section-number">04</span><h2>I wrote this instead of trying to say it normally.</h2></div>
+      <div class="envelope-wrap reveal delay-1"><button class="envelope" id="envelope" aria-label="Open letter"><div class="envelope-back"></div><div class="envelope-flap"></div><div class="seal">♡</div><div class="envelope-label">For Boss</div></button><p id="envelopeHint">Tap the envelope.</p></div>
       <article class="letter" id="letterContent" aria-hidden="true">
         <p class="hand">Dear Clara,</p>
         <p>I genuinely don't know when it happened. Somewhere between Sky, random conversations, and aggressively spamming emotes at each other, you became someone I really, really care about.</p>
@@ -124,16 +73,13 @@
       <p class="eyebrow reveal">05 · one last thing</p>
       <h2 class="final-title reveal delay-1">So, Clara…</h2>
       <p class="final-text reveal delay-2">I don't need a perfect answer. I just wanted you to know what has been living in my head for a while.</p>
-      <p class="final-question reveal delay-3">Can I keep making silly little memories with you? ♡</p>
-      <div class="answer-buttons reveal delay-4">
-        <button id="yesBtn">Yes ♡</button>
-        <button id="hugBtn">Come here 🫂</button>
-      </div>
+      <p class="final-question reveal delay-3">Boss, you may have beaten me in every emote war… but there's one battle I'm still determined to win: your heart. ♡</p>
+      <div class="answer-buttons reveal delay-4"><button id="yesBtn">Yes ♡</button><button id="hugBtn">Come here 🫂</button></div>
       <div class="answer-message" id="answerMessage"></div>
     </section>
   </main>
 
-  <footer>made with too many feelings & a little bit of Sky magic ♡</footer>
+  <footer id="footer">made with too many feelings & a little bit of Sky magic ♡</footer>
   <script src="script.js"></script>
 </body>
 </html>
