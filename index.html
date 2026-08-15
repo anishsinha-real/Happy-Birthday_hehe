@@ -3,231 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#ff1493">
-  <title>A Special Day For You 💕</title>
+  <meta name="theme-color" content="#09070b">
+  <meta name="description" content="A little birthday story made especially for Clara.">
+  <title>For Clara — 17 ✦</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background-gradient"></div>
-  <div class="floating-emojis" id="floatingEmojis"></div>
-  
-  <header class="header">
-    <div class="header-content">
-      <h1 class="title">✨ Happy Birthday <span id="personName">You</span> ✨</h1>
-      <p class="subtitle">Something special for someone special</p>
-    </div>
-  </header>
+  <div class="grain"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div id="sparkles" aria-hidden="true"></div>
 
-  <main class="container">
-    <!-- SECTION 1: Welcome -->
-    <section class="section welcome-section">
-      <div class="confetti-burst" id="confettiBurst"></div>
-      
-      <div class="welcome-card">
-        <div class="emoji-large">🎂</div>
-        <h2 class="section-title">Happy Birthday!</h2>
-        <p class="section-text">
-          Today is your special day, and I wanted to make something just for you. 
-          Something that shows how much you mean to me. ✨
-        </p>
-        <p class="section-text">
-          So I put together this little digital surprise with memories, fun surprises, and something I've been wanting to say for a while...
-        </p>
-        
-        <div class="envelope-wrapper">
-          <div class="envelope" id="envelope">
-            <div class="envelope-flap"></div>
-            <div class="envelope-body"></div>
-            <div class="envelope-letter">
-              <div class="letter">
-                <p class="letter-header">💌 A Special Message 💌</p>
-                <p class="letter-line">Dear you,</p>
-                <p class="letter-line">
-                  I wanted to tell you something. You make ordinary moments feel magical. 
-                  Your laugh, your kindness, the way you light up when you're excited... 
-                  it all matters so much more than you probably realize.
-                </p>
-                <p class="letter-line">
-                  On your birthday, I wanted you to know just how special you are to me. 💕
-                </p>
-                <p class="letter-signature">With love,<br>Someone who cares 💜</p>
-              </div>
-            </div>
-          </div>
-          <button class="envelope-btn" id="envelopeBtn">💌 Open the Letter 💌</button>
+  <nav class="topbar" aria-label="Story navigation">
+    <span class="brand">A little something · for you</span>
+    <button class="sound-btn" id="soundBtn" type="button" aria-label="Toggle ambient sound">♪ <span>sound</span></button>
+  </nav>
+
+  <main>
+    <!-- LAYER 1 -->
+    <section class="layer hero active" id="layer-1">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">A tiny corner of the internet, made for one person</p>
+        <h1>Happy 17th,<br><em>Clara.</em></h1>
+        <p class="hero-sub">Before you do anything else… take a breath.<br>I made this because your birthday deserved more than a text.</p>
+        <button class="primary-btn next-btn" data-next="layer-2">Begin the little story <span>→</span></button>
+      </div>
+      <div class="portrait-frame" aria-label="A photo of Clara">
+        <div class="portrait-glow"></div>
+        <div class="portrait-placeholder">
+          <span>YOUR PHOTO</span>
+          <small>Replace <b>assets/clara.jpg</b> with the photo I designed this around.</small>
         </div>
+        <img src="assets/clara.jpg" alt="Clara" onerror="this.style.display='none'">
+        <span class="frame-note">17 · 08 · 2026</span>
+      </div>
+      <div class="scroll-hint">scroll / tap to continue <span>↓</span></div>
+    </section>
+
+    <!-- LAYER 2 -->
+    <section class="layer story" id="layer-2">
+      <div class="chapter-no">01</div>
+      <div class="story-content">
+        <p class="eyebrow">Somewhere in SKY</p>
+        <h2>We met without<br><em>even knowing</em> who we were.</h2>
+        <div class="story-grid">
+          <p>There wasn't a grand introduction. No dramatic movie scene. We just somehow ended up in the same little world and started spamming emotes at each other.</p>
+          <p>And then, somehow, you made me call you <strong>“boss.”</strong> You called yourself a pro while continuously messing around. Honestly? That was probably the most accurate introduction possible.</p>
+        </div>
+        <div class="quote-card"><span>“</span><p>pro btw</p><small>— Clara, allegedly</small></div>
+        <button class="text-btn next-btn" data-next="layer-3">I remember the little things →</button>
       </div>
     </section>
 
-    <!-- SECTION 2: Fun Facts & Memories -->
-    <section class="section memories-section">
-      <h2 class="section-title">🌟 Fun Facts About You 🌟</h2>
-      
-      <div class="fun-facts">
-        <div class="fact-card">
-          <div class="fact-emoji">😊</div>
-          <p class="fact-text">Your smile is contagious in the best way</p>
+    <!-- LAYER 3 -->
+    <section class="layer memories" id="layer-3">
+      <div class="chapter-no">02</div>
+      <div class="memory-intro">
+        <p class="eyebrow">The things that stayed</p>
+        <h2>It's funny how<br><em>little moments</em> matter.</h2>
+      </div>
+      <div class="memory-stack">
+        <article class="memory-card card-a"><span>01</span><h3>The emote spam</h3><p>Two strangers communicating entirely through tiny animations. Somehow, it worked.</p></article>
+        <article class="memory-card card-b"><span>02</span><h3>“Call me boss.”</h3><p>I still don't know how I agreed to that so quickly. But okay, boss.</p></article>
+        <article class="memory-card card-c"><span>03</span><h3>The “pro”</h3><p>Confidence: 100%. Actual gameplay: we shall not discuss this.</p></article>
+      </div>
+      <button class="primary-btn next-btn" data-next="layer-4">There is more I want to say <span>→</span></button>
+    </section>
+
+    <!-- LAYER 4 -->
+    <section class="layer letter-layer" id="layer-4">
+      <div class="paper">
+        <p class="eyebrow">A birthday letter</p>
+        <h2>Dear Clara,</h2>
+        <div class="letter-body" id="letterBody">
+          <p>Happy 17th birthday. ♡</p>
+          <p>I don't know if there is a perfect way to say all of this, so I'll just say it honestly.</p>
+          <p>I'm really glad we met. Out of all the random people we could have crossed paths with in SKY, somehow I got to meet you. And somewhere between the jokes, the chaos, the emotes and you being “boss”, you became someone I genuinely look forward to talking to.</p>
+          <p>You have this way of making ordinary moments feel a little less ordinary. I hope this year gives you reasons to laugh loudly, dream bigger and be proud of the person you're becoming.</p>
+          <p>And yes… there is one more thing I have been wanting to tell you.</p>
         </div>
-        <div class="fact-card">
-          <div class="fact-emoji">💭</div>
-          <p class="fact-text">You're deeper than you think you are</p>
+        <div class="signature">— Anish</div>
+      </div>
+      <button class="primary-btn next-btn" data-next="layer-5">One last thing… <span>→</span></button>
+    </section>
+
+    <!-- LAYER 5 -->
+    <section class="layer video-layer" id="layer-5">
+      <div class="chapter-no">03</div>
+      <div class="video-intro">
+        <p class="eyebrow">Before the question</p>
+        <h2>Okay. This part<br>is <em>actually</em> for you.</h2>
+        <p>I made a little video because some things are easier to say when you can just press play.</p>
+      </div>
+      <div class="video-shell">
+        <video id="userVideo" controls playsinline preload="metadata">
+          <source src="your-video.mp4" type="video/mp4">
+          Your browser does not support video playback.
+        </video>
+        <div class="video-empty"><span>▶</span><p>Add your video as <b>your-video.mp4</b></p></div>
+      </div>
+      <button class="primary-btn next-btn" data-next="layer-6">Okay… I'm ready <span>→</span></button>
+    </section>
+
+    <!-- LAYER 6 -->
+    <section class="layer proposal" id="layer-6">
+      <div class="proposal-inner">
+        <p class="eyebrow">The part I've been building up to</p>
+        <h2>I know you probably<br>had <em>some idea</em> about<br>what I was going to ask.</h2>
+        <p class="proposal-copy">But I wanted to ask properly. No tricks, no pressure, no perfectly rehearsed speech.</p>
+        <div class="question">Clara, would you<br><em>go out with me?</em></div>
+        <div class="answers">
+          <button class="answer yes" id="yesBtn">Yes ♡</button>
+          <button class="answer maybe" id="thinkBtn">I need a little time</button>
         </div>
-        <div class="fact-card">
-          <div class="fact-emoji">🎨</div>
-          <p class="fact-text">You add color to my world</p>
-        </div>
-        <div class="fact-card">
-          <div class="fact-emoji">⭐</div>
-          <p class="fact-text">You deserve more recognition than you get</p>
-        </div>
-        <div class="fact-card">
-          <div class="fact-emoji">🎵</div>
-          <p class="fact-text">You make the mundane feel musical</p>
-        </div>
-        <div class="fact-card">
-          <div class="fact-emoji">💎</div>
-          <p class="fact-text">You're a rare gem and don't let anyone tell you otherwise</p>
-        </div>
+        <p class="no-pressure">Whatever your answer is, I mean it when I say: no pressure. I just wanted you to know how I feel.</p>
       </div>
     </section>
 
-    <!-- SECTION 3: Video Message -->
-    <section class="section video-section">
-      <h2 class="section-title">📹 A Special Video Message 📹</h2>
-      <p class="quiz-subtitle">I recorded something for you...</p>
-      
-      <div class="video-container">
-        <div class="video-wrapper" id="videoWrapper">
-          <video id="userVideo" width="100%" controls>
-            <source src="your-video.mp4" type="video/mp4">
-            Your browser doesn't support videos. Please use Chrome, Firefox, or Safari.
-          </video>
-          <div class="video-placeholder" id="videoPlaceholder">
-            <div class="play-icon">▶️</div>
-            <p class="placeholder-text">Click to watch</p>
-          </div>
-        </div>
-      </div>
-      
-      <p class="video-note">💕 I wanted you to see this on your special day</p>
-    </section>
-
-    <!-- SECTION 4: Quick Fun Quiz -->
-    <section class="section quiz-section">
-      <h2 class="section-title">🎮 Quick Fun Quiz! 🎮</h2>
-      <p class="quiz-subtitle">Answer these about yourself (no wrong answers!)</p>
-      
-      <div class="quiz-container">
-        <div class="quiz-question">
-          <p class="question-text">What's your vibe right now?</p>
-          <div class="question-options">
-            <button class="quiz-option" data-answer="sunshine">☀️ Sunshine & Vibes</button>
-            <button class="quiz-option" data-answer="cozy">🌙 Cozy & Chill</button>
-            <button class="quiz-option" data-answer="adventure">🚀 Adventure Ready</button>
-            <button class="quiz-option" data-answer="party">🎉 Party Mode</button>
-          </div>
-        </div>
-
-        <div class="quiz-question" style="display:none;">
-          <p class="question-text">What makes you happiest?</p>
-          <div class="question-options">
-            <button class="quiz-option" data-answer="people">👥 Time with people I love</button>
-            <button class="quiz-option" data-answer="create">🎨 Creating something new</button>
-            <button class="quiz-option" data-answer="nature">🌿 Nature & peace</button>
-            <button class="quiz-option" data-answer="learn">📚 Learning something cool</button>
-          </div>
-        </div>
-
-        <div class="quiz-question" style="display:none;">
-          <p class="question-text">How would you describe yourself?</p>
-          <div class="question-options">
-            <button class="quiz-option" data-answer="thoughtful">💭 Thoughtful & deep</button>
-            <button class="quiz-option" data-answer="funny">😄 Funny & witty</button>
-            <button class="quiz-option" data-answer="kind">💕 Kind & caring</button>
-            <button class="quiz-option" data-answer="unique">✨ Unique & different</button>
-          </div>
-        </div>
-
-        <div class="quiz-progress">
-          <div class="progress-bar">
-            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
-          </div>
-          <p id="progressText" class="progress-text">Question 1 of 3</p>
-        </div>
-
-        <button class="next-btn" id="nextBtn" style="display:none;">Next Question →</button>
-      </div>
-    </section>
-
-    <!-- SECTION 4: The Big Question -->
-    <section class="section proposal-section">
-      <div class="proposal-card">
-        <div class="heart-animation">💕</div>
-        
-        <h2 class="section-title">One More Thing...</h2>
-        
-        <div class="proposal-message">
-          <p class="proposal-text">
-            I know this might come as a surprise, but I've been thinking about this for a while.
-          </p>
-          
-          <p class="proposal-text">
-            You make me want to be better. You make ordinary days feel special. 
-            And I really, really like spending time with you.
-          </p>
-          
-          <p class="proposal-text bold">
-            So... will you go out with me? 🥺💕
-          </p>
-        </div>
-
-        <div class="proposal-buttons">
-          <button class="btn btn-yes" id="yesBtn">Yes! 💕 Let's go!</button>
-          <button class="btn btn-think" id="thinkBtn">Hmm... 👀 Let me think</button>
-        </div>
-
-        <p class="proposal-note">No pressure at all! I just wanted you to know. 💜</p>
-      </div>
-    </section>
-
-    <!-- SUCCESS MESSAGE -->
-    <section class="section success-section" id="successSection" style="display:none;">
-      <div class="success-card">
-        <div class="success-emoji">🎉</div>
-        <h2>That's amazing!</h2>
-        <p class="success-text">
-          I'm so happy right now! 💕
-        </p>
-        <p class="success-text">
-          You just made this the best birthday ever. Let's make more amazing memories together! 🌟
-        </p>
-        <button class="btn btn-primary" onclick="window.location.reload()">✨ See it Again ✨</button>
-      </div>
-    </section>
-
-    <!-- THINKING MESSAGE -->
-    <section class="section thinking-section" id="thinkingSection" style="display:none;">
-      <div class="thinking-card">
-        <div class="thinking-emoji">🤔</div>
-        <h2>Take your time!</h2>
-        <p class="thinking-text">
-          I'm not going anywhere. Whenever you're ready, I'll be here. 💜
-        </p>
-        <p class="thinking-text">
-          But just so you know... I meant every word. ✨
-        </p>
-        <button class="btn btn-primary" onclick="window.location.reload()">✨ Start Over ✨</button>
+    <!-- LAYER 7 -->
+    <section class="layer ending" id="layer-7">
+      <div class="ending-inner">
+        <div class="big-heart">♡</div>
+        <p class="eyebrow" id="endingEyebrow">Maybe this is the beginning.</p>
+        <h2 id="endingTitle">Then let's make<br><em>some memories.</em></h2>
+        <p id="endingText">Happy birthday, Clara. I'm really happy I met you.</p>
+        <button class="text-btn" id="restartBtn">↻ Start from the beginning</button>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>Made with 💕 just for you</p>
-  </footer>
-
+  <footer>made with a ridiculous amount of thought · A</footer>
   <script src="script.js"></script>
 </body>
 </html>
