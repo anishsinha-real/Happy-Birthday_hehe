@@ -1,130 +1,46 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#07050a" />
-  <meta name="description" content="A little birthday story made for Clara — and one question I've been wanting to ask." />
-  <title>For Clara — 17 ♡</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#07050a">
+<meta name="description" content="A little birthday story made for Clara — and one question I've been wanting to ask.">
+<title>For Clara — 17 ♡</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0}body{background:#07050a;color:#f6efe8;font-family:'DM Sans',sans-serif;overflow:hidden}.grain{position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E')}.orb{position:fixed;width:42vw;height:42vw;border-radius:50%;filter:blur(110px);opacity:.2;pointer-events:none;z-index:0}.orb-a{background:#7c304f;left:-20vw;top:15vh}.orb-b{background:#493267;right:-20vw;bottom:-20vh}#stars{position:fixed;inset:0;pointer-events:none;z-index:1}.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.5;animation:twinkle 4s infinite ease-in-out}.topbar{position:fixed;z-index:30;top:0;left:0;right:0;height:78px;padding:0 5vw;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);backdrop-filter:blur(14px);background:rgba(7,5,10,.5)}.brand{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#b7abb0}.sound{background:none;border:0;color:#d9cdd0;text-transform:uppercase;letter-spacing:.12em;font-size:10px;cursor:pointer}.sound span{margin-left:6px;color:#83757d}.progress{position:fixed;top:77px;left:5vw;width:90vw;height:1px;background:rgba(255,255,255,.08);z-index:30}.progress span{display:block;height:100%;width:14.28%;background:#dca2b7;transition:width .7s ease}main{position:relative;width:100%;height:100vh;z-index:2}.layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:110px 8vw 70px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(24px) scale(.985);transition:opacity .7s ease,transform .7s ease,visibility .7s ease}.layer.active{opacity:1;visibility:visible;pointer-events:auto;transform:none}.content{width:min(1120px,100%)}.narrow{max-width:950px}.eyebrow{margin:0 0 22px;color:#c08fa1;text-transform:uppercase;letter-spacing:.2em;font-size:10px}.hero{justify-content:space-between;gap:8vw}.hero-copy{max-width:650px}.hero h1,h2{font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:-.04em;line-height:.88;margin:0}.hero h1{font-size:clamp(68px,9.5vw,150px)}em{color:#d9a0b5;font-style:italic}.lead{font-size:16px;line-height:1.8;color:#aaa0a6;margin:32px 0}.lead.small{max-width:600px;margin:20px 0}.primary{border:1px solid rgba(218,162,183,.5);background:rgba(217,160,181,.08);color:#f7edf0;padding:16px 22px;border-radius:2px;letter-spacing:.05em;cursor:pointer;transition:.25s}.primary:hover{background:rgba(217,160,181,.16);transform:translateY(-2px)}.primary span{margin-left:28px}.photo-card{position:relative;width:min(32vw,390px);aspect-ratio:3/4;border:1px solid rgba(255,255,255,.12);padding:12px;transform:rotate(2deg);background:#0d0a0f;box-shadow:0 30px 90px rgba(0,0,0,.45)}.photo-card img{position:absolute;inset:12px;width:calc(100% - 24px);height:calc(100% - 50px);object-fit:cover}.photo-fallback{position:absolute;inset:12px 12px 38px;display:grid;place-items:center;text-align:center;background:linear-gradient(145deg,#171017,#09070b);color:#82747b}.photo-fallback span{font:70px 'Cormorant Garamond';color:#d29bad}.photo-fallback small{font-size:10px;line-height:1.6;letter-spacing:.08em}.photo-caption{position:absolute;bottom:10px;left:16px;font-size:9px;letter-spacing:.16em;color:#9b8d93}.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#756970}.chapter{position:absolute;left:5vw;top:15vh;font:italic 90px 'Cormorant Garamond';color:rgba(255,255,255,.06)}h2{font-size:clamp(54px,7vw,100px)}.columns{display:grid;grid-template-columns:1fr 1fr;gap:7vw;margin:42px 0;color:#a89da3;line-height:1.8;font-size:15px}.columns strong{color:#eadde1}.quote{display:flex;gap:25px;align-items:center;border-top:1px solid rgba(255,255,255,.09);border-bottom:1px solid rgba(255,255,255,.09);padding:24px 0;margin-bottom:28px}.quote>span{font:80px 'Cormorant Garamond';color:#d49db0;line-height:.5}.quote strong{font:22px 'Cormorant Garamond';font-style:italic}.quote small{display:block;color:#71666d;margin-top:6px}.text-next{border:0;background:none;color:#cba8b5;padding:8px 0;cursor:pointer;font-size:12px;letter-spacing:.08em}.memory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:48px 0}.memory-grid article{min-height:250px;padding:28px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.025);transition:.3s}.memory-grid article:hover{transform:translateY(-6px);border-color:rgba(218,162,183,.3)}.memory-grid span{color:#a67688;font-size:10px;letter-spacing:.16em}.memory-grid h3{font:32px 'Cormorant Garamond';margin:60px 0 12px}.memory-grid p{color:#8f858b;font-size:13px;line-height:1.7}.letter{flex-direction:column}.paper{width:min(680px,100%);max-height:65vh;overflow:auto;padding:48px 55px;background:#eee2d7;color:#32272b;box-shadow:0 25px 90px rgba(0,0,0,.4);transform:rotate(-.5deg)}.paper .eyebrow{color:#9c6578}.paper h2{font-size:65px;margin-bottom:25px}.letter-body{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.55}.letter-body p{margin:0 0 18px}.signature{font:italic 30px 'Cormorant Garamond';text-align:right;margin-top:25px}.letter>.primary{margin-top:28px}.video-content{display:flex;flex-direction:column;align-items:flex-start}.video-shell{width:min(800px,100%);aspect-ratio:16/9;background:#050408;border:1px solid rgba(255,255,255,.12);position:relative;margin:22px 0 25px;overflow:hidden}.video-shell video{width:100%;height:100%;display:block;object-fit:contain}.video-empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#71666d;background:#050408;pointer-events:none}.video-empty span{font-size:32px;color:#c38ea3}.video-empty p{font-size:11px}.video-shell.has-video .video-empty{display:none}.proposal-content{text-align:center}.proposal-copy{max-width:620px;margin:30px auto;color:#91868c;line-height:1.7}.question{font:clamp(36px,5vw,68px) 'Cormorant Garamond';margin:45px 0}.answers{display:flex;justify-content:center;gap:14px}.answer{padding:15px 28px;border-radius:999px;cursor:pointer;font:inherit}.yes{border:1px solid #d9a0b5;background:#d9a0b5;color:#1b1117}.think{border:1px solid rgba(255,255,255,.18);background:transparent;color:#c7bdc1}.no-pressure{font-size:10px;color:#675d63;margin-top:25px}.ending-content{text-align:center}.heart{font-size:90px;color:#d99db3;animation:float 3s ease-in-out infinite}.ending-content h2{margin:15px 0 25px}.ending-content>p:not(.eyebrow){color:#958990}.ending .text-next{margin-top:25px}footer{position:fixed;z-index:30;bottom:15px;left:50%;transform:translateX(-50%);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:#514850;white-space:nowrap}@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:.8;transform:scale(1.5)}}@keyframes float{50%{transform:translateY(-10px)}}@media(max-width:800px){.topbar{height:65px;padding:0 22px}.progress{top:64px;left:22px;width:calc(100% - 44px)}.layer{padding:90px 25px 55px}.hero{justify-content:center;text-align:center}.hero-copy{max-width:none}.hero h1{font-size:72px}.hero .lead{font-size:13px}.photo-card{display:none}.scroll-hint{bottom:18px}.columns,.memory-grid{grid-template-columns:1fr;gap:16px}.columns{margin:30px 0}.memory-grid{margin:30px 0}.memory-grid article{min-height:0;padding:22px}.memory-grid h3{margin:20px 0 8px}.paper{padding:30px 26px;max-height:62vh}.paper h2{font-size:52px}.letter-body{font-size:17px}.chapter{left:25px;top:100px;font-size:55px}.video-content{align-items:center;text-align:center}.video-shell{margin-top:20px}.answers{flex-direction:column;align-items:stretch;width:min(300px,100%);margin:auto}.proposal h2{font-size:48px}footer{font-size:7px}.brand{font-size:8px}}
+</style>
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="orb orb-a" aria-hidden="true"></div>
-  <div class="orb orb-b" aria-hidden="true"></div>
-  <div id="stars" aria-hidden="true"></div>
-
-  <header class="topbar">
-    <div class="brand">a little something · for you</div>
-    <button class="sound" id="soundBtn" type="button" aria-label="Toggle sound">♪ <span>sound</span></button>
-  </header>
-
-  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-
-  <main id="story">
-    <section class="layer active hero" data-layer="1">
-      <div class="hero-copy">
-        <p class="eyebrow">A tiny corner of the internet, made for one person</p>
-        <h1>Happy 17th,<br><em>Clara.</em></h1>
-        <p class="lead">Before you do anything else… take a breath.<br>I made this because your birthday deserved more than a text.</p>
-        <button class="primary next" type="button">Begin the little story <span>→</span></button>
-      </div>
-      <div class="photo-card">
-        <div class="photo-fallback"><span>♡</span><small>Add your photo at<br><b>assets/clara.jpg</b></small></div>
-        <img src="assets/clara.jpg" alt="Clara" onerror="this.remove()">
-        <div class="photo-caption">17 · 08 · 2026</div>
-      </div>
-      <div class="scroll-hint">scroll / tap to continue ↓</div>
-    </section>
-
-    <section class="layer story" data-layer="2">
-      <div class="chapter">01</div>
-      <div class="content narrow">
-        <p class="eyebrow">Somewhere in SKY</p>
-        <h2>We met without<br><em>even knowing</em> who we were.</h2>
-        <div class="columns">
-          <p>There wasn't a grand introduction. No dramatic movie scene. We just somehow ended up in the same little world and started spamming emotes at each other.</p>
-          <p>Then you made me call you <strong>“boss.”</strong> You called yourself a pro while continuously messing around. Honestly? That was probably the most accurate introduction possible.</p>
-        </div>
-        <div class="quote"><span>“</span><div><strong>pro btw</strong><small>— Clara, allegedly</small></div></div>
-        <button class="text-next next" type="button">I remember the little things →</button>
-      </div>
-    </section>
-
-    <section class="layer memories" data-layer="3">
-      <div class="chapter">02</div>
-      <div class="content">
-        <p class="eyebrow">The things that stayed</p>
-        <h2>It's funny how<br><em>little moments</em> matter.</h2>
-        <div class="memory-grid">
-          <article><span>01</span><h3>The emote spam</h3><p>Two strangers communicating entirely through tiny animations. Somehow, it worked.</p></article>
-          <article><span>02</span><h3>“Call me boss.”</h3><p>I still don't know how I agreed to that so quickly. But okay, boss.</p></article>
-          <article><span>03</span><h3>The “pro”</h3><p>Confidence: 100%. Actual gameplay: we shall not discuss this.</p></article>
-        </div>
-        <button class="primary next" type="button">There is more I want to say <span>→</span></button>
-      </div>
-    </section>
-
-    <section class="layer letter" data-layer="4">
-      <div class="paper">
-        <p class="eyebrow">A birthday letter</p>
-        <h2>Dear Clara,</h2>
-        <div class="letter-body">
-          <p><strong>Happy 17th birthday. ♡</strong></p>
-          <p>I don't know if there is a perfect way to say all of this, so I'll just say it honestly.</p>
-          <p>I'm really glad we met. Out of all the random people we could have crossed paths with in SKY, somehow I got to meet you. And somewhere between the jokes, the chaos, the emotes and you being “boss”, you became someone I genuinely look forward to talking to.</p>
-          <p>You have this way of making ordinary moments feel a little less ordinary. I hope this year gives you reasons to laugh loudly, dream bigger and be proud of the person you're becoming.</p>
-          <p>And yes… there is one more thing I have been wanting to tell you.</p>
-        </div>
-        <div class="signature">— Anish</div>
-      </div>
-      <button class="primary next" type="button">One last thing… <span>→</span></button>
-    </section>
-
-    <section class="layer video" data-layer="5">
-      <div class="content video-content">
-        <p class="eyebrow">Before the question</p>
-        <h2>Okay. This part<br>is <em>actually</em> for you.</h2>
-        <p class="lead small">I made a little video because some things are easier to say when you can just press play.</p>
-        <div class="video-shell">
-          <video id="userVideo" controls playsinline preload="metadata">
-            <source src="assets/your-video.mp4" type="video/mp4">
-          </video>
-          <div class="video-empty"><span>▶</span><p>Add your video as <b>assets/your-video.mp4</b></p></div>
-        </div>
-        <button class="primary next" type="button">Okay… I'm ready <span>→</span></button>
-      </div>
-    </section>
-
-    <section class="layer proposal" data-layer="6">
-      <div class="content proposal-content">
-        <p class="eyebrow">The part I've been building up to</p>
-        <h2>I know you probably<br>had <em>some idea</em> about<br>what I was going to ask.</h2>
-        <p class="proposal-copy">But I wanted to ask properly. No tricks, no pressure, no perfectly rehearsed speech.</p>
-        <div class="question">Clara, would you<br><em>go out with me?</em></div>
-        <div class="answers">
-          <button class="answer yes" id="yesBtn" type="button">Yes ♡</button>
-          <button class="answer think" id="thinkBtn" type="button">I need a little time</button>
-        </div>
-        <p class="no-pressure">Whatever your answer is, I mean it when I say: no pressure. I just wanted you to know how I feel.</p>
-      </div>
-    </section>
-
-    <section class="layer ending" data-layer="7">
-      <div class="content ending-content">
-        <div class="heart">♡</div>
-        <p class="eyebrow" id="endingEyebrow">Maybe this is the beginning.</p>
-        <h2 id="endingTitle">Then let's make<br><em>some memories.</em></h2>
-        <p id="endingText">Happy birthday, Clara. I'm really happy I met you.</p>
-        <button class="text-next" id="restart" type="button">↻ Start from the beginning</button>
-      </div>
-    </section>
-  </main>
-
-  <footer>made with a ridiculous amount of thought · A</footer>
-  <script src="script.js"></script>
+<div class="grain" aria-hidden="true"></div><div class="orb orb-a" aria-hidden="true"></div><div class="orb orb-b" aria-hidden="true"></div><div id="stars" aria-hidden="true"></div>
+<header class="topbar"><div class="brand">a little something · for you</div><button class="sound" id="soundBtn" type="button">♪ <span>sound</span></button></header>
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+<main id="story">
+<section class="layer active hero" data-layer="1"><div class="hero-copy"><p class="eyebrow">A tiny corner of the internet, made for one person</p><h1>Happy 17th,<br><em>Clara.</em></h1><p class="lead">Before you do anything else… take a breath.<br>I made this because your birthday deserved more than a text.</p><button class="primary next" type="button">Begin the little story <span>→</span></button></div><div class="photo-card"><div class="photo-fallback"><span>♡</span><small>Add your photo at<br><b>assets/clara.jpg</b></small></div><img src="assets/clara.jpg" alt="Clara" onerror="this.style.display='none'"><div class="photo-caption">17 · 08 · 2026</div></div><div class="scroll-hint">scroll / tap to continue ↓</div></section>
+<section class="layer story" data-layer="2"><div class="chapter">01</div><div class="content narrow"><p class="eyebrow">Somewhere in SKY</p><h2>We met without<br><em>even knowing</em> who we were.</h2><div class="columns"><p>There wasn't a grand introduction. No dramatic movie scene. We just somehow ended up in the same little world and started spamming emotes at each other.</p><p>Then you made me call you <strong>“boss.”</strong> You called yourself a pro while continuously messing around. Honestly? That was probably the most accurate introduction possible.</p></div><div class="quote"><span>“</span><div><strong>pro btw</strong><small>— Clara, allegedly</small></div></div><button class="text-next next" type="button">I remember the little things →</button></div></section>
+<section class="layer memories" data-layer="3"><div class="chapter">02</div><div class="content"><p class="eyebrow">The things that stayed</p><h2>It's funny how<br><em>little moments</em> matter.</h2><div class="memory-grid"><article><span>01</span><h3>The emote spam</h3><p>Two strangers communicating entirely through tiny animations. Somehow, it worked.</p></article><article><span>02</span><h3>“Call me boss.”</h3><p>I still don't know how I agreed to that so quickly. But okay, boss.</p></article><article><span>03</span><h3>The “pro”</h3><p>Confidence: 100%. Actual gameplay: we shall not discuss this.</p></article></div><button class="primary next" type="button">There is more I want to say <span>→</span></button></div></section>
+<section class="layer letter" data-layer="4"><div class="paper"><p class="eyebrow">A birthday letter</p><h2>Dear Clara,</h2><div class="letter-body"><p><strong>Happy 17th birthday. ♡</strong></p><p>I don't know if there is a perfect way to say all of this, so I'll just say it honestly.</p><p>I'm really glad we met. Out of all the random people we could have crossed paths with in SKY, somehow I got to meet you. And somewhere between the jokes, the chaos, the emotes and you being “boss”, you became someone I genuinely look forward to talking to.</p><p>You have this way of making ordinary moments feel a little less ordinary. I hope this year gives you reasons to laugh loudly, dream bigger and be proud of the person you're becoming.</p><p>And yes… there is one more thing I have been wanting to tell you.</p></div><div class="signature">— Anish</div></div><button class="primary next" type="button">One last thing… <span>→</span></button></section>
+<section class="layer video" data-layer="5"><div class="content video-content"><p class="eyebrow">Before the question</p><h2>Okay. This part<br>is <em>actually</em> for you.</h2><p class="lead small">I made a little video because some things are easier to say when you can just press play.</p><div class="video-shell" id="videoShell"><video id="userVideo" controls playsinline preload="metadata"><source src="assets/your-video.mp4" type="video/mp4"></video><div class="video-empty"><div><span>▶</span><p>Add your video as <b>assets/your-video.mp4</b></p></div></div></div><button class="primary next" type="button">Okay… I'm ready <span>→</span></button></div></section>
+<section class="layer proposal" data-layer="6"><div class="content proposal-content"><p class="eyebrow">The part I've been building up to</p><h2>I know you probably<br>had <em>some idea</em> about<br>what I was going to ask.</h2><p class="proposal-copy">But I wanted to ask properly. No tricks, no pressure, no perfectly rehearsed speech.</p><div class="question">Clara, would you<br><em>go out with me?</em></div><div class="answers"><button class="answer yes" id="yesBtn" type="button">Yes ♡</button><button class="answer think" id="thinkBtn" type="button">I need a little time</button></div><p class="no-pressure">Whatever your answer is, I mean it when I say: no pressure. I just wanted you to know how I feel.</p></div></section>
+<section class="layer ending" data-layer="7"><div class="content ending-content"><div class="heart">♡</div><p class="eyebrow" id="endingEyebrow">Maybe this is the beginning.</p><h2 id="endingTitle">Then let's make<br><em>some memories.</em></h2><p id="endingText">Happy birthday, Clara. I'm really happy I met you.</p><button class="text-next" id="restart" type="button">↻ Start from the beginning</button></div></section>
+</main><footer>made with a ridiculous amount of thought · A</footer>
+<script>
+(function(){
+const layers=Array.from(document.querySelectorAll('.layer')),progress=document.getElementById('progressBar');let current=0,busy=false;
+function show(i){if(i<0||i>=layers.length||busy)return;busy=true;layers.forEach((l,n)=>l.classList.toggle('active',n===i));current=i;progress.style.width=((i+1)/layers.length*100)+'%';window.setTimeout(()=>busy=false,720)}
+document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>show(current+1)));
+document.getElementById('restart').addEventListener('click',()=>show(0));
+const yes=document.getElementById('yesBtn'),think=document.getElementById('thinkBtn');
+yes.addEventListener('click',()=>{document.getElementById('endingEyebrow').textContent='You said yes. ♡';document.getElementById('endingTitle').innerHTML="Then let's make<br><em>some memories.</em>";document.getElementById('endingText').textContent="Happy birthday, Clara. I think this might be my favourite birthday wish I've ever made.";show(6);burst()});
+think.addEventListener('click',()=>{document.getElementById('endingEyebrow').textContent='Take all the time you need. ♡';document.getElementById('endingTitle').innerHTML="No pressure.<br><em>Really.</em>";document.getElementById('endingText').textContent="I just wanted you to know how I feel. Whatever your answer is, I'm grateful I got to meet you.";show(6)});
+let touchStart=0;window.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)>25){e.deltaY>0?show(current+1):show(current-1)}},{passive:true});window.addEventListener('touchstart',e=>touchStart=e.touches[0].clientY,{passive:true});window.addEventListener('touchend',e=>{const d=touchStart-e.changedTouches[0].clientY;if(Math.abs(d)>45)d>0?show(current+1):show(current-1)},{passive:true});document.addEventListener('keydown',e=>{if(['ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}});
+const stars=document.getElementById('stars');for(let i=0;i<75;i++){const s=document.createElement('i');s.className='star';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*4+'s';stars.appendChild(s)}
+const soundBtn=document.getElementById('soundBtn');soundBtn.addEventListener('click',()=>{soundBtn.querySelector('span').textContent='on';try{const C=window.AudioContext||window.webkitAudioContext;if(C){const c=new C(),o=c.createOscillator(),g=c.createGain();o.frequency.value=220;g.gain.value=.012;o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.25)}}catch(e){} });
+function burst(){for(let i=0;i<28;i++){const s=document.createElement('i');s.className='star';s.style.left='50%';s.style.top='50%';s.style.position='fixed';s.style.zIndex=50;document.body.appendChild(s);requestAnimationFrame(()=>{const a=Math.random()*Math.PI*2,r=120+Math.random()*280;s.style.transition='1.2s ease';s.style.transform='translate('+Math.cos(a)*r+'px,'+Math.sin(a)*r+'px) scale(2)';s.style.opacity='0'});setTimeout(()=>s.remove(),1300)}}
+const video=document.getElementById('userVideo'),shell=document.getElementById('videoShell');video.addEventListener('loadeddata',()=>shell.classList.add('has-video'));video.addEventListener('error',()=>shell.classList.remove('has-video'));show(0);
+})();
+</script>
 </body>
 </html>
