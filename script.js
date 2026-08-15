@@ -1,222 +1,209 @@
-// ====== PERSONALIZE THESE ======
-const HER_NAME = "Her Name";
-// ================================
+// ===== PERSONALIZATION =====
+// Change this to the person's name!
+const PERSON_NAME = "Clara";
+// ============================
 
-document.getElementById("heroName").textContent = HER_NAME + ".";
-document.getElementById("navName").textContent = HER_NAME.toLowerCase();
+// Set the person's name
+document.getElementById("personName").textContent = PERSON_NAME;
 
-const progress = document.querySelector(".progress span");
-const sectionNo = document.getElementById("sectionNo");
-const sections = [...document.querySelectorAll("[data-section]")];
+// ===== FLOATING EMOJIS =====
+const emojis = ['💕', '🌟', '✨', '💜', '🎉', '💝', '🌸', '💖'];
 
-window.addEventListener("scroll", () => {
-  const max = document.documentElement.scrollHeight - innerHeight;
-  progress.style.width = `${(scrollY / max) * 100}%`;
+function createFloatingEmoji() {
+  const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+  const floatingEmoji = document.createElement('div');
+  floatingEmoji.className = 'floating-emoji';
+  floatingEmoji.textContent = emoji;
+  floatingEmoji.style.left = Math.random() * window.innerWidth + 'px';
+  floatingEmoji.style.top = window.innerHeight + 'px';
+  
+  document.getElementById('floatingEmojis').appendChild(floatingEmoji);
+  
+  setTimeout(() => floatingEmoji.remove(), 4000);
+}
 
-  let current = "01";
-  sections.forEach(section => {
-    if (scrollY + innerHeight * .45 >= section.offsetTop) current = section.dataset.section;
-  });
-  sectionNo.textContent = current;
-}, {passive:true});
+// Create floating emojis occasionally
+setInterval(createFloatingEmoji, 800);
 
-// ===== ENVELOPE OPENING ANIMATION =====
-const envelope = document.getElementById("envelope");
-const openEnvelopeBtn = document.getElementById("openEnvelopeBtn");
+// ===== ENVELOPE INTERACTION =====
+const envelope = document.getElementById('envelope');
+const envelopeBtn = document.getElementById('envelopeBtn');
 let envelopeOpened = false;
 
-openEnvelopeBtn.addEventListener("click", (e) => {
-  e.preventDefault();
+envelopeBtn.addEventListener('click', () => {
   if (!envelopeOpened) {
-    envelope.classList.add("opened");
+    envelope.classList.add('opened');
     envelopeOpened = true;
+    envelopeBtn.textContent = '💌 Opened! 💌';
+    envelopeBtn.style.opacity = '0.6';
+    envelopeBtn.style.pointerEvents = 'none';
     
-    // Create sparkles
-    createSparkles(envelope);
+    // Confetti on envelope open
+    createConfetti();
     
-    // Play sound effect (optional - remove if no sound file)
-    playSound();
-    
-    // Scroll to next section after animation
+    // Scroll down after delay
     setTimeout(() => {
-      document.querySelector("#words")?.scrollIntoView({behavior:"smooth"});
-    }, 1200);
+      document.querySelector('.memories-section').scrollIntoView({ behavior: 'smooth' });
+    }, 1500);
   }
 });
 
-// Sparkle effect around envelope
-function createSparkles(element) {
-  const rect = element.getBoundingClientRect();
-  for(let i = 0; i < 20; i++) {
-    const sparkle = document.createElement("div");
-    sparkle.style.position = "fixed";
-    sparkle.style.left = rect.left + rect.width/2 + "px";
-    sparkle.style.top = rect.top + rect.height/2 + "px";
-    sparkle.style.width = "8px";
-    sparkle.style.height = "8px";
-    sparkle.style.borderRadius = "50%";
-    sparkle.style.pointerEvents = "none";
-    sparkle.style.zIndex = "999";
+// ===== CONFETTI EFFECT =====
+function createConfetti() {
+  const confettiContainer = document.querySelector('.confetti-burst');
+  const colors = ['#ff1493', '#00bfff', '#ffd700', '#ff69b4', '#00ff7f'];
+  
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti-piece';
     
-    const colors = ["#ff006e", "#00d9ff", "#ffbe0b"];
     const color = colors[Math.floor(Math.random() * colors.length)];
-    sparkle.style.background = color;
-    sparkle.style.boxShadow = `0 0 12px ${color}`;
+    confetti.style.background = color;
+    confetti.style.left = Math.random() * 100 + '%';
+    confetti.style.top = '50%';
+    confetti.style.left = (50 + Math.random() * 100 - 50) + '%';
     
-    document.body.appendChild(sparkle);
+    const delay = Math.random() * 0.1;
+    confetti.style.animationDelay = delay + 's';
     
-    const angle = (i / 20) * Math.PI * 2;
-    const distance = 100 + Math.random() * 50;
-    const tx = Math.cos(angle) * distance;
-    const ty = Math.sin(angle) * distance;
+    const duration = 2 + Math.random() * 1;
+    confetti.style.animationDuration = duration + 's';
     
-    sparkle.animate([
-      {transform: "translate(0,0) scale(1)", opacity: 1},
-      {transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0}
-    ], {duration: 900, easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)"});
+    document.body.appendChild(confetti);
     
-    setTimeout(() => sparkle.remove(), 900);
+    setTimeout(() => confetti.remove(), (duration + delay) * 1000);
   }
 }
 
-// Optional sound effect - remove this if you don't want sound
-function playSound() {
-  // Creates a simple beep sound using Web Audio API
-  try {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.value = 800;
-    oscillator.type = "sine";
-    
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.3);
-  } catch(e) {
-    // Audio context not available, silently fail
-  }
+// ===== QUIZ FUNCTIONALITY =====
+const quizQuestions = document.querySelectorAll('.quiz-question');
+let currentQuestion = 0;
+let correctAnswers = 0;
+
+function updateProgress() {
+  const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+  document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${quizQuestions.length}`;
 }
 
-// ===== SCROLL BUTTONS =====
-document.querySelectorAll("[data-scroll]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const target = document.querySelector(btn.dataset.scroll);
-    if(target) target.scrollIntoView({behavior:"smooth"});
-  });
-});
-
-// ===== REVEAL ANIMATIONS ON SCROLL =====
-const observer = new IntersectionObserver(entries => {
-  entries.forEach((entry) => {
-    if(entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, {threshold:.12});
-
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-
-// ===== MOUSE TRACKING FOR ORBS =====
-document.addEventListener("mousemove", (e) => {
-  const orbs = document.querySelectorAll(".orb");
-  orbs.forEach(orb => {
-    const rect = orb.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
+document.querySelectorAll('.quiz-option').forEach(option => {
+  option.addEventListener('click', function() {
+    // Disable all options in this question
+    this.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+      opt.style.pointerEvents = 'none';
+      opt.style.opacity = '0.5';
+    });
     
-    const angle = Math.atan2(e.clientY - y, e.clientX - x);
-    const distance = 20;
+    // Highlight the selected answer
+    this.style.opacity = '1';
+    this.style.borderColor = '#ff1493';
+    this.style.background = '#fff0f5';
     
-    orb.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+    // Move to next question or show button
+    setTimeout(() => {
+      if (currentQuestion < quizQuestions.length - 1) {
+        quizQuestions[currentQuestion].style.display = 'none';
+        currentQuestion++;
+        quizQuestions[currentQuestion].style.display = 'block';
+        updateProgress();
+      } else {
+        // Quiz complete - scroll to proposal
+        document.getElementById('nextBtn').style.display = 'block';
+        document.getElementById('nextBtn').textContent = 'Ready? Let\'s continue! →';
+      }
+    }, 500);
   });
 });
 
-// ===== VIDEO SECTION =====
-const video = document.getElementById("birthdayVideo");
-const placeholder = document.getElementById("videoPlaceholder");
-const playButton = document.getElementById("playButton");
-
-video.style.visibility = "hidden";
-
-playButton.addEventListener("click", () => {
-  video.style.visibility = "visible";
-  placeholder.style.display = "none";
-  video.play().catch(() => {});
-  createSparkles(playButton);
+document.getElementById('nextBtn').addEventListener('click', () => {
+  document.querySelector('.quiz-section').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => {
+    document.querySelector('.proposal-section').scrollIntoView({ behavior: 'smooth' });
+  }, 800);
 });
 
-video.addEventListener("ended", () => {
-  document.querySelector("#proposal")?.scrollIntoView({behavior:"smooth"});
-});
-
-video.addEventListener("error", () => {
-  video.style.visibility = "hidden";
-  placeholder.style.display = "flex";
-  document.querySelector(".video-hint").textContent = "Add birthday-video.mp4 to play";
-});
+updateProgress();
 
 // ===== PROPOSAL BUTTONS =====
-const success = document.getElementById("success");
-const yesBtn = document.getElementById("yesBtn");
-const maybeBtn = document.getElementById("maybeBtn");
-
-yesBtn.addEventListener("click", (e) => {
-  success.classList.add("show");
-  makeConfetti();
-  createButtonRipple(e, yesBtn);
-});
-
-maybeBtn.addEventListener("click", (e) => {
-  maybeBtn.textContent = "Take your time ♡";
-  maybeBtn.style.transform = "scale(.98)";
-  createButtonRipple(e, maybeBtn);
-  setTimeout(() => maybeBtn.style.transform = "", 300);
-});
-
-// Ripple effect on click
-function createButtonRipple(event, button) {
-  const ripple = document.createElement("span");
-  const rect = button.getBoundingClientRect();
-  const size = Math.max(rect.width, rect.height);
-  const x = event.clientX - rect.left - size / 2;
-  const y = event.clientY - rect.top - size / 2;
+document.getElementById('yesBtn').addEventListener('click', () => {
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(section => {
+    section.style.display = 'none';
+  });
   
-  ripple.style.width = ripple.style.height = size + "px";
-  ripple.style.left = x + "px";
-  ripple.style.top = y + "px";
-  ripple.style.position = "absolute";
-  ripple.style.borderRadius = "50%";
-  ripple.style.background = "rgba(255,255,255,.6)";
-  ripple.style.pointerEvents = "none";
-  ripple.style.animation = "ripple-animation .6s ease-out";
+  // Show success section
+  document.getElementById('successSection').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   
-  button.style.position = "relative";
-  button.style.overflow = "hidden";
-  button.appendChild(ripple);
-  
-  setTimeout(() => ripple.remove(), 600);
-}
-
-document.getElementById("closeSuccess").addEventListener("click", () => {
-  success.classList.remove("show");
-});
-
-// Confetti effect
-function makeConfetti(){
-  const box = document.getElementById("confetti");
-  box.innerHTML = "";
-  for(let i=0; i<70; i++){
-    const piece = document.createElement("i");
-    piece.style.left = Math.random() * 100 + "%";
-    piece.style.animationDuration = (2.5 + Math.random() * 3) + "s";
-    piece.style.animationDelay = Math.random() * 0.8 + "s";
-    piece.style.transform = `rotate(${Math.random() * 360}deg)`;
-    box.appendChild(piece);
+  // Create confetti explosion
+  for (let i = 0; i < 3; i++) {
+    setTimeout(createConfetti, i * 200);
   }
-}
+});
+
+document.getElementById('thinkBtn').addEventListener('click', () => {
+  // Hide all sections
+  document.querySelectorAll('.section').forEach(section => {
+    section.style.display = 'none';
+  });
+  
+  // Show thinking section
+  document.getElementById('thinkingSection').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Create gentle floating emojis instead
+  for (let i = 0; i < 5; i++) {
+    setTimeout(createFloatingEmoji, i * 200);
+  }
+});
+
+// ===== SMOOTH SCROLL BEHAVIOR =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+
+// ===== PAGE LOAD ANIMATION =====
+window.addEventListener('load', () => {
+  document.body.style.opacity = '1';
+  
+  // Welcome animation
+  createFloatingEmoji();
+  setTimeout(() => createFloatingEmoji(), 300);
+  setTimeout(() => createFloatingEmoji(), 600);
+});
+
+// Make sure page starts at top
+window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
+});
+
+// Add some initial animations
+document.addEventListener('DOMContentLoaded', () => {
+  // Animate section titles on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.section').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+    section.style.transition = 'all 0.6s ease';
+    observer.observe(section);
+  });
+});
