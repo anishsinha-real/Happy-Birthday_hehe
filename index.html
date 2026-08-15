@@ -77,21 +77,20 @@
   class="sound-toggle"
   id="soundToggle"
   type="button"
-  aria-label="Pause background music"
-  title="Pause music"
+  aria-label="Play background music"
+  title="Play music"
 >
-  ♫
+  ×
 </button>
 
 <audio
   id="bgMusic"
+  autoplay
   loop
   preload="auto"
-  autoplay
 >
-  <source src="music.mp3" type="audio/mpeg">
+  <source src="./music.mp3" type="audio/mpeg">
 </audio>
-
 
   <!-- =====================================================
        MAIN CONTENT
