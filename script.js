@@ -19,31 +19,30 @@ if(hug)hug.onclick=()=>{if(answer)answer.textContent='Come here then, Boss. 🫂
 const glow=$('.cursor-glow');window.addEventListener('pointermove',e=>{if(glow){glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'}});
 window.burst=burst;window.heart=heart;window.petal=petal;window.unlockMusic=unlockMusic;window.blowCake=blowCake;
 
-/* Vertical page-by-page navigation. */
+/* Fix the vertical controller's transform priority. The existing controller in index.html
+   remains responsible for navigation; this only makes its vertical transform actually win. */
 setTimeout(()=>{
- const track=$('#track'),carousel=$('#carousel'),pages=$$('.slide'),progress=$('#progressBar'),label=$('#progressLabel');
+ const track=$('#track'),carousel=$('#carousel'),pages=$$('.slide');
  if(!track||!carousel||!pages.length)return;
- const style=document.createElement('style');style.textContent=`
- .carousel{overflow:hidden!important;touch-action:pan-y!important}
- .track{display:flex!important;flex-direction:column!important;width:100%!important;height:100%!important;position:relative!important;transform:translate3d(0,0,0)!important;transition:transform .9s cubic-bezier(.76,0,.18,1)!important}
- .slide{position:relative!important;inset:auto!important;flex:0 0 100%!important;width:100%!important;height:100%!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;filter:none!important}
- .slide .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .75s cubic-bezier(.2,.8,.2,1)!important}
- .slide.active .reveal{opacity:1!important;transform:none!important}
- .scene-back{display:none!important}
- @media(max-width:700px){.carousel{height:calc(100vh - 34px)!important}.track{transition-duration:.72s!important}}
- `;document.head.appendChild(style);
- /* Remove the old inline cinematic click handlers. */
- $$('.enter-btn,[data-scene-next],#restart').forEach(button=>{const copy=button.cloneNode(true);button.replaceWith(copy)});
- document.querySelector('.scene-back')?.remove();
- let current=0,busy=false,startY=0,startX=0;
- function update(n){current=Math.max(0,Math.min(pages.length-1,n));track.style.transform=`translate3d(0,${-current*100}%,0)`;pages.forEach((p,i)=>p.classList.toggle('active',i===current));if(progress)progress.style.width=((current+1)/pages.length*100)+'%';if(label)label.textContent=String(current+1).padStart(2,'0')+' / '+String(pages.length).padStart(2,'0')}
- function go(n){if(busy||n===current||n<0||n>=pages.length)return;busy=true;unlockMusic();update(n);setTimeout(()=>busy=false,760)}
- function next(){go(current+1)}function prev(){go(current-1)}
- $$('.enter-btn,[data-scene-next]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();next()}));
- const restart=$('#restart');if(restart)restart.addEventListener('click',()=>{if(busy)return;update(0);burst(18)});
- let wheelLock=false;carousel.addEventListener('wheel',e=>{if(Math.abs(e.deltaY)<18||wheelLock)return;e.preventDefault();wheelLock=true;e.deltaY>0?next():prev();setTimeout(()=>wheelLock=false,820)},{passive:false});
- carousel.addEventListener('touchstart',e=>{const t=e.changedTouches[0];startY=t.clientY;startX=t.clientX},{passive:true});
- carousel.addEventListener('touchend',e=>{const t=e.changedTouches[0],dy=t.clientY-startY,dx=t.clientX-startX;if(Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>45){dy<0?next():prev()}},{passive:true});
- window.addEventListener('keydown',e=>{if(e.target.matches('button,input,a'))return;if(e.key==='ArrowDown'||e.key==='PageDown')next();if(e.key==='ArrowUp'||e.key==='PageUp')prev()});
- update(0);
-},0);
+ let syncing=false;
+ const sync=()=>{
+   if(syncing)return;
+   const value=track.style.getPropertyValue('transform');
+   if(!value)return;
+   syncing=true;
+   track.style.setProperty('transform',value,'important');
+   requestAnimationFrame(()=>{syncing=false});
+ };
+ const observer=new MutationObserver(sync);
+ observer.observe(track,{attributes:true,attributeFilter:['style']});
+ track.style.setProperty('display','flex','important');
+ track.style.setProperty('flex-direction','column','important');
+ track.style.setProperty('width','100%','important');
+ track.style.setProperty('height','600vh','important');
+ pages.forEach(page=>{
+   page.style.setProperty('flex','0 0 100vh','important');
+   page.style.setProperty('width','100%','important');
+   page.style.setProperty('height','100vh','important');
+ });
+ sync();
+},120);
