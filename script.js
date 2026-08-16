@@ -12,71 +12,17 @@ document.addEventListener('pointerdown',unlockMusic,{once:true});
 
 /* Letter overlay */
 const envelope=$('#envelope'),letter=$('#letterContent');
-let letterParent=null,letterNext=null,letterBackdrop=null,letterClose=null;
-function resetTypedLetter(){
- if(!letter)return;
- letter.querySelectorAll('.type-word').forEach(w=>{w.classList.remove('typed');w.removeAttribute('aria-hidden')});
- letter.querySelectorAll('.type-cursor').forEach(c=>c.remove());
-}
-function closeLetter(){
- if(!letter||!letterParent)return;
- letter.classList.remove('open','letter-floating','typing');letter.setAttribute('aria-hidden','true');letter.style.cssText='';resetTypedLetter();
- if(letterNext&&letterNext.parentNode===letterParent)letterParent.insertBefore(letter,letterNext);else letterParent.appendChild(letter);
- letterParent=null;letterNext=null;if(letterBackdrop){letterBackdrop.remove();letterBackdrop=null}if(letterClose){letterClose.remove();letterClose=null}
- const hint=$('#envelopeHint');if(hint)hint.textContent='Tap the envelope.';envelope?.classList.remove('open');
-}
-function prepareWordTyping(){
- if(!letter)return;
- resetTypedLetter();
- const targets=letter.querySelectorAll('p,b');
- targets.forEach(el=>{
-   if(el.closest('.signature')===el)return;
-   const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
-   const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
-   nodes.forEach(node=>{
-     const text=node.nodeValue;
-     if(!text.trim())return;
-     const frag=document.createDocumentFragment();
-     text.split(/(\s+)/).forEach(part=>{
-       if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return}
-       const span=document.createElement('span');span.className='type-word';span.textContent=part;span.setAttribute('aria-hidden','true');frag.appendChild(span);
-     });
-     node.parentNode.replaceChild(frag,node);
-   });
- });
-}
-async function typeLetter(){
- if(!letter)return;
- const words=[...letter.querySelectorAll('.type-word')];
- const cursor=document.createElement('span');cursor.className='type-cursor';cursor.textContent='▌';
- let activeParent=null;
- for(let i=0;i<words.length;i++){
-   const word=words[i];
-   if(activeParent!==word.parentElement){
-     if(activeParent)activeParent.querySelector('.type-cursor')?.remove();
-     activeParent=word.parentElement;activeParent.appendChild(cursor);
-   }
-   word.classList.add('typed');
-   /* Slow, human-like pacing: short words linger briefly, longer words get more time, and punctuation adds a natural pause. */
-   const t=word.textContent;
-   const punctuation=/[.!?,;:…]$/.test(t);
-   const pause=punctuation?720:Math.max(260,Math.min(620,180+t.length*38));
-   await new Promise(r=>setTimeout(r,pause));
- }
- cursor.remove();
-}
-function openLetter(){
- if(!letter||letterParent)return;letterParent=letter.parentNode;letterNext=letter.nextSibling;
- letterBackdrop=document.createElement('button');letterBackdrop.type='button';letterBackdrop.className='letter-backdrop';letterBackdrop.setAttribute('aria-label','Close letter');document.body.appendChild(letterBackdrop);letterBackdrop.onclick=closeLetter;
- letterClose=document.createElement('button');letterClose.type='button';letterClose.className='letter-close';letterClose.innerHTML='×';letterClose.setAttribute('aria-label','Close letter');document.body.appendChild(letterClose);letterClose.onclick=closeLetter;
- document.body.appendChild(letter);letter.classList.add('open','letter-floating','typing');letter.setAttribute('aria-hidden','false');const hint=$('#envelopeHint');if(hint)hint.textContent='♡ From me to you.';burst(18);
- prepareWordTyping();
- requestAnimationFrame(()=>typeLetter());
-}
+let letterParent=null,letterNext=null,letterBackdrop=null,letterClose=null,typingRun=0;
+function resetTypedLetter(){if(!letter)return;letter.querySelectorAll('.type-word').forEach(w=>w.classList.remove('typed'));letter.querySelectorAll('.type-cursor').forEach(c=>c.remove())}
+function closeLetter(){if(!letter||!letterParent)return;typingRun++;letter.classList.remove('open','letter-floating','typing');letter.setAttribute('aria-hidden','true');letter.style.cssText='';resetTypedLetter();if(letterNext&&letterNext.parentNode===letterParent)letterParent.insertBefore(letter,letterNext);else letterParent.appendChild(letter);letterParent=null;letterNext=null;if(letterBackdrop){letterBackdrop.remove();letterBackdrop=null}if(letterClose){letterClose.remove();letterClose=null}const hint=$('#envelopeHint');if(hint)hint.textContent='Tap the envelope.';envelope?.classList.remove('open')}
+function prepareWordTyping(){if(!letter)return;resetTypedLetter();const targets=letter.querySelectorAll('p,b');targets.forEach(el=>{if(el.closest('.signature')===el)return;const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(node=>{const text=node.nodeValue;if(!text.trim())return;const frag=document.createDocumentFragment();text.split(/(\s+)/).forEach(part=>{if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return}const span=document.createElement('span');span.className='type-word';span.textContent=part;span.setAttribute('aria-hidden','true');frag.appendChild(span)});node.parentNode.replaceChild(frag,node)})})}
+function wait(ms){return new Promise(r=>setTimeout(r,ms))}
+async function typeLetter(run){if(!letter)return;const words=[...letter.querySelectorAll('.type-word')];const cursor=document.createElement('span');cursor.className='type-cursor';cursor.textContent='▌';let activeParent=null;for(let i=0;i<words.length;i++){if(run!==typingRun)return;const word=words[i];if(activeParent!==word.parentElement){activeParent?.querySelector('.type-cursor')?.remove();activeParent=word.parentElement;activeParent.appendChild(cursor)}word.classList.add('typed');const t=word.textContent;const punctuation=/[.!?,;:…]$/.test(t);const pause=punctuation?900:Math.max(320,Math.min(720,230+t.length*42));await wait(pause)}if(run===typingRun)cursor.remove()}
+function openLetter(){if(!letter||letterParent)return;letterParent=letter.parentNode;letterNext=letter.nextSibling;letterBackdrop=document.createElement('button');letterBackdrop.type='button';letterBackdrop.className='letter-backdrop';letterBackdrop.setAttribute('aria-label','Close letter');document.body.appendChild(letterBackdrop);letterBackdrop.onclick=closeLetter;letterClose=document.createElement('button');letterClose.type='button';letterClose.className='letter-close';letterClose.innerHTML='×';letterClose.setAttribute('aria-label','Close letter');document.body.appendChild(letterClose);letterClose.onclick=closeLetter;document.body.appendChild(letter);letter.classList.add('open','letter-floating','typing');letter.setAttribute('aria-hidden','false');const hint=$('#envelopeHint');if(hint)hint.textContent='♡ From me to you.';burst(18);prepareWordTyping();const run=++typingRun;requestAnimationFrame(()=>typeLetter(run))}
 if(envelope)envelope.onclick=()=>letterParent?closeLetter():openLetter();
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&letterParent)closeLetter()});
 
-/* Handwritten word-by-word reveal */
+/* Clean handwritten word-by-word typing */
 const letterStyle=document.createElement('style');letterStyle.textContent=`
 .letter-backdrop{position:fixed!important;inset:0!important;z-index:9998!important;border:0!important;background:rgba(5,2,12,.68)!important;backdrop-filter:blur(8px)!important;cursor:pointer!important}
 .letter.letter-floating{position:fixed!important;left:50%!important;top:50%!important;z-index:9999!important;width:min(620px,90vw)!important;max-height:min(650px,82vh)!important;overflow:auto!important;margin:0!important;opacity:1!important;transform:translate(-50%,-50%) scale(1)!important;filter:none!important}
@@ -84,15 +30,15 @@ const letterStyle=document.createElement('style');letterStyle.textContent=`
 .letter.typing{font-family:Caveat,cursive!important}
 .letter.typing p,.letter.typing b,.letter.typing .confession,.letter.typing .signature{font-family:Caveat,cursive!important;font-weight:500!important}
 .letter.typing p{font-size:1.62rem!important;line-height:1.55!important;letter-spacing:.012em!important;color:#4a3540!important}
-.letter.typing .type-word{opacity:0;filter:blur(2px);display:inline-block;transform:translateY(3px);transition:opacity .28s ease,filter .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
-.letter.typing .type-word.typed{opacity:1;filter:none;transform:none}
+.letter.typing .type-word{opacity:0;display:inline;filter:none;transform:none;transition:opacity .22s ease}
+.letter.typing .type-word.typed{opacity:1}
 .type-cursor{display:inline-block;color:#c43b83;font-weight:500;margin-left:3px;animation:typingBlink .85s steps(1) infinite;transform:translateY(2px);font-family:Caveat,cursive}
-.letter.typing .hand{font:2.8rem/1.1 Caveat,cursive!important;text-shadow:.25px .25px 0 #3c2a38!important;color:#30252d!important}
+.letter.typing .hand{font:2.8rem/1.1 Caveat,cursive!important;color:#30252d!important}
 .letter.typing .confession{font-family:Caveat,cursive!important;font-size:1.85rem!important;line-height:1.5!important;color:#a72f69!important;letter-spacing:.015em!important}
 .letter.typing .signature{font-family:Caveat,cursive!important;font-size:1.75rem!important}
 @keyframes typingBlink{50%{opacity:0}}
-@media(max-width:800px){.letter.letter-floating{width:88vw!important;max-height:78vh!important;padding:26px 22px!important;border-radius:12px!important}.letter-close{right:12px!important;top:12px!important;width:38px!important;height:38px!important}.letter.typing p{font-size:1.48rem!important;line-height:1.5!important}.letter.typing .hand{font-size:2.45rem!important}.letter.typing .confession{font-size:1.68rem!important}.letter.typing .type-word{transition-duration:.3s}}
-@media(prefers-reduced-motion:reduce){.letter.typing .type-word{opacity:1!important;filter:none!important;transform:none!important}.type-cursor{display:none!important}}
+@media(max-width:800px){.letter.letter-floating{width:88vw!important;max-height:78vh!important;padding:26px 22px!important;border-radius:12px!important}.letter-close{right:12px!important;top:12px!important;width:38px!important;height:38px!important}.letter.typing p{font-size:1.48rem!important;line-height:1.5!important}.letter.typing .hand{font-size:2.45rem!important}.letter.typing .confession{font-size:1.68rem!important}}
+@media(prefers-reduced-motion:reduce){.letter.typing .type-word{opacity:1!important}.type-cursor{display:none!important}}
 `;document.head.appendChild(letterStyle);
 
 let cakeBlown=false;function blowCake(){if(cakeBlown)return;cakeBlown=true;$('#cake')?.classList.add('blown');const wish=$('#wish');if(wish){wish.textContent='Wish made. ♡';wish.classList.add('show')}burst(30,'✦');for(let i=0;i<15;i++)setTimeout(petal,i*50)}
