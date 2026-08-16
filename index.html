@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0715" />
+  <meta name="description" content="A little birthday universe made especially for Clara." />
+  <title>For Clara ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+  <button class="sound-toggle" id="soundToggle" type="button" aria-label="Play background music" title="Play music">×</button>
+
+  <audio id="bgMusic" loop preload="auto" autoplay>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-glow"></div>
+      <p class="eyebrow reveal">A tiny corner of the internet, made for one person.</p>
+      <h1 class="hero-title reveal delay-1">Happy Birthday,<br><span>Clara.</span></h1>
+      <p class="hero-subtitle reveal delay-2">aka <strong>Boss</strong> — because apparently that's what I call you now.</p>
+      <button class="enter-btn reveal delay-3" id="enterBtn" type="button">Enter my little surprise <span>↓</span></button>
+      <p class="scroll-hint">17 looks good on you ♡</p>
+    </section>
+
+    <section class="section story" id="story">
+      <div class="section-heading reveal">
+        <span class="section-number">01</span>
+        <h2>And somehow, it started with a game.</h2>
+        <p>Sky brought two people together who probably had no idea what was coming.</p>
+      </div>
+      <div class="story-grid">
+        <article class="story-card large reveal">
+          <span class="card-icon">☁</span>
+          <p class="tiny-label">THE BEGINNING</p>
+          <h3>One game.<br>Two idiots.<br>Way too many emotes.</h3>
+          <p>We met through <em>Sky</em>. And honestly, one of my favourite memories is how we'd just spam emotes at each other like that was a perfectly normal way to communicate.</p>
+        </article>
+        <article class="story-card reveal delay-1">
+          <span class="card-icon">♡</span>
+          <p class="tiny-label">THE FUNNY PART</p>
+          <h3>I still don't have a reason.</h3>
+          <p>There isn't some dramatic explanation. No checklist. No grand moment. I just… ended up caring about you a lot.</p>
+        </article>
+        <article class="story-card accent reveal delay-2">
+          <span class="card-icon">✦</span>
+          <p class="tiny-label">THE LITTLE THING</p>
+          <h3>Maybe that's the point.</h3>
+          <p>Sometimes you don't fall for a reason. You just notice that someone has quietly become your favourite part of the day.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section memories" id="memories">
+      <div class="section-heading centered reveal">
+        <span class="section-number">02</span>
+        <h2>A few things I want you to know.</h2>
+      </div>
+      <div class="memory-grid">
+        <div class="memory-frame reveal">
+          <img class="memory-photo" src="images/sky-adventure.jpg" alt="A favourite Sky adventure memory" loading="eager">
+        </div>
+        <div class="memory-note reveal delay-1">
+          <span>✎</span>
+          <p>"The way we spammed emotes onto each other"</p>
+          <small>— one of the memories I keep coming back to</small>
+        </div>
+        <div class="memory-frame reveal delay-2">
+          <img class="memory-photo" src="images/sky-memory.jpg" alt="A favourite Sky memory" loading="lazy">
+        </div>
+        <div class="memory-note soft reveal delay-3">
+          <span>☼</span>
+          <p>Some memories don't need a date attached to them to matter.</p>
+        </div>
+      </div>
+      <p class="replace-note">A few little pieces of Sky that I never want to forget. ♡</p>
+    </section>
+
+    <section class="section letter-section" id="letter">
+      <div class="section-heading centered reveal">
+        <span class="section-number">03</span>
+        <h2>I wrote this instead of trying to say it normally.</h2>
+      </div>
+
+      <div class="envelope-wrap reveal delay-1">
+        <button class="envelope" id="envelope" type="button" aria-label="Open letter">
+          <div class="envelope-back"></div>
+          <div class="envelope-flap"></div>
+          <div class="seal">♡</div>
+          <div class="envelope-label">For Boss</div>
+        </button>
+        <p id="envelopeHint">Tap the envelope.</p>
+      </div>
+
+      <article class="letter" id="letterContent" aria-hidden="true">
+        <p class="hand">Dear Clara,</p>
+        <p>I genuinely don't know when it happened. Somewhere between Sky, random conversations, and aggressively spamming emotes at each other, you became someone I really, really care about.</p>
+        <p>And the weirdest part? I don't have one perfect reason for it. I can't point at one thing and say, <em>“that's why.”</em> I just know that talking to you feels different. Your presence feels different. You feel important to me.</p>
+        <p>So on your 17th birthday, I wanted to stop hiding behind jokes for a minute and actually say it.</p>
+        <p class="confession">I think somewhere along the way, I fell for you — not because of one reason, but because somehow, being around you started feeling like something I never wanted to lose. ♡</p>
+        <p>Happy birthday, Boss. I hope 17 gives you a ridiculous amount of reasons to smile.</p>
+        <p class="signature">— someone who is definitely not normal about you TwT</p>
+      </article>
+    </section>
+
+    <section class="section final" id="final">
+      <div class="final-orbit" aria-hidden="true">♡</div>
+      <p class="eyebrow reveal">04 · one last thing</p>
+      <h2 class="final-title reveal delay-1">So, Clara…</h2>
+      <p class="final-text reveal delay-2">I don't need a perfect answer. I just wanted you to know what has been living in my head for a while.</p>
+      <p class="final-question reveal delay-3">Boss, you may have beaten me in every emote war… but there's one battle I'm still determined to win: your heart. ♡</p>
+      <div class="answer-buttons reveal delay-4">
+        <button id="yesBtn" type="button">Yes ♡</button>
+        <button id="hugBtn" type="button">Come here 🫂</button>
+      </div>
+      <div class="answer-message" id="answerMessage" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer id="footer">made with too many feelings & a little bit of Sky magic ♡</footer>
+  <script src="script.js"></script>
+</body>
+</html>
