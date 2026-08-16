@@ -57,7 +57,11 @@ async function typeLetter(){
      activeParent=word.parentElement;activeParent.appendChild(cursor);
    }
    word.classList.add('typed');
-   await new Promise(r=>setTimeout(r,Math.max(70,Math.min(210,word.textContent.length*18))));
+   /* Slow, human-like pacing: short words linger briefly, longer words get more time, and punctuation adds a natural pause. */
+   const t=word.textContent;
+   const punctuation=/[.!?,;:…]$/.test(t);
+   const pause=punctuation?720:Math.max(260,Math.min(620,180+t.length*38));
+   await new Promise(r=>setTimeout(r,pause));
  }
  cursor.remove();
 }
@@ -72,19 +76,22 @@ function openLetter(){
 if(envelope)envelope.onclick=()=>letterParent?closeLetter():openLetter();
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&letterParent)closeLetter()});
 
-/* Word-by-word handwriting/typewriter effect */
+/* Handwritten word-by-word reveal */
 const letterStyle=document.createElement('style');letterStyle.textContent=`
 .letter-backdrop{position:fixed!important;inset:0!important;z-index:9998!important;border:0!important;background:rgba(5,2,12,.68)!important;backdrop-filter:blur(8px)!important;cursor:pointer!important}
 .letter.letter-floating{position:fixed!important;left:50%!important;top:50%!important;z-index:9999!important;width:min(620px,90vw)!important;max-height:min(650px,82vh)!important;overflow:auto!important;margin:0!important;opacity:1!important;transform:translate(-50%,-50%) scale(1)!important;filter:none!important}
 .letter-close{position:fixed!important;right:18px!important;top:18px!important;z-index:10000!important;width:42px!important;height:42px!important;border-radius:50%!important;border:1px solid rgba(255,255,255,.25)!important;background:rgba(255,255,255,.1)!important;color:#fff!important;font-size:25px!important;line-height:1!important;cursor:pointer!important;backdrop-filter:blur(10px)!important}
-.letter.typing .type-word{opacity:0;filter:blur(1px);display:inline-block;transform:translateY(2px);transition:opacity .12s ease,filter .18s ease,transform .18s ease}
+.letter.typing{font-family:Caveat,cursive!important}
+.letter.typing p,.letter.typing b,.letter.typing .confession,.letter.typing .signature{font-family:Caveat,cursive!important;font-weight:500!important}
+.letter.typing p{font-size:1.62rem!important;line-height:1.55!important;letter-spacing:.012em!important;color:#4a3540!important}
+.letter.typing .type-word{opacity:0;filter:blur(2px);display:inline-block;transform:translateY(3px);transition:opacity .28s ease,filter .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
 .letter.typing .type-word.typed{opacity:1;filter:none;transform:none}
-.type-cursor{display:inline-block;color:#c43b83;font-weight:600;margin-left:2px;animation:typingBlink .7s steps(1) infinite;transform:translateY(1px)}
-.letter.typing .hand{font:2.55rem Caveat,cursive;text-shadow:.35px .35px 0 #3c2a38}
-.letter.typing .confession{font-family:Caveat,cursive;font-size:1.7rem;line-height:1.35;color:#b73576;letter-spacing:.01em}
-.letter.typing .signature{font-family:Caveat,cursive;font-size:1.55rem}
+.type-cursor{display:inline-block;color:#c43b83;font-weight:500;margin-left:3px;animation:typingBlink .85s steps(1) infinite;transform:translateY(2px);font-family:Caveat,cursive}
+.letter.typing .hand{font:2.8rem/1.1 Caveat,cursive!important;text-shadow:.25px .25px 0 #3c2a38!important;color:#30252d!important}
+.letter.typing .confession{font-family:Caveat,cursive!important;font-size:1.85rem!important;line-height:1.5!important;color:#a72f69!important;letter-spacing:.015em!important}
+.letter.typing .signature{font-family:Caveat,cursive!important;font-size:1.75rem!important}
 @keyframes typingBlink{50%{opacity:0}}
-@media(max-width:800px){.letter.letter-floating{width:88vw!important;max-height:78vh!important;padding:26px 22px!important;border-radius:12px!important}.letter-close{right:12px!important;top:12px!important;width:38px!important;height:38px!important}.letter.typing .type-word{transition-duration:.08s}}
+@media(max-width:800px){.letter.letter-floating{width:88vw!important;max-height:78vh!important;padding:26px 22px!important;border-radius:12px!important}.letter-close{right:12px!important;top:12px!important;width:38px!important;height:38px!important}.letter.typing p{font-size:1.48rem!important;line-height:1.5!important}.letter.typing .hand{font-size:2.45rem!important}.letter.typing .confession{font-size:1.68rem!important}.letter.typing .type-word{transition-duration:.3s}}
 @media(prefers-reduced-motion:reduce){.letter.typing .type-word{opacity:1!important;filter:none!important;transform:none!important}.type-cursor{display:none!important}}
 `;document.head.appendChild(letterStyle);
 
