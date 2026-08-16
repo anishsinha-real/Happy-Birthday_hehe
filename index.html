@@ -13,8 +13,11 @@
 </head>
 <body>
   <div class="noise"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
   <div class="stars" id="stars" aria-hidden="true"></div>
   <div class="hearts" id="hearts" aria-hidden="true"></div>
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
 
   <button class="sound-toggle" id="soundToggle" type="button" aria-label="Play background music" title="Play music">×</button>
 
@@ -25,10 +28,12 @@
   <main>
     <section class="hero" id="home">
       <div class="hero-glow"></div>
+      <div class="hero-orbit orbit-one"></div>
+      <div class="hero-orbit orbit-two"></div>
       <p class="eyebrow reveal">A tiny corner of the internet, made for one person.</p>
       <h1 class="hero-title reveal delay-1">Happy Birthday,<br><span>Clara.</span></h1>
       <p class="hero-subtitle reveal delay-2">aka <strong>Boss</strong> — because apparently that's what I call you now.</p>
-      <button class="enter-btn reveal delay-3" id="enterBtn" type="button">Enter my little surprise <span>↓</span></button>
+      <button class="enter-btn magnetic reveal delay-3" id="enterBtn" type="button">Enter my little surprise <span>↓</span></button>
       <p class="scroll-hint">17 looks good on you ♡</p>
     </section>
 
@@ -39,19 +44,19 @@
         <p>Sky brought two people together who probably had no idea what was coming.</p>
       </div>
       <div class="story-grid">
-        <article class="story-card large reveal">
+        <article class="story-card large tilt reveal">
           <span class="card-icon">☁</span>
           <p class="tiny-label">THE BEGINNING</p>
           <h3>One game.<br>Two idiots.<br>Way too many emotes.</h3>
           <p>We met through <em>Sky</em>. And honestly, one of my favourite memories is how we'd just spam emotes at each other like that was a perfectly normal way to communicate.</p>
         </article>
-        <article class="story-card reveal delay-1">
+        <article class="story-card tilt reveal delay-1">
           <span class="card-icon">♡</span>
           <p class="tiny-label">THE FUNNY PART</p>
           <h3>I still don't have a reason.</h3>
           <p>There isn't some dramatic explanation. No checklist. No grand moment. I just… ended up caring about you a lot.</p>
         </article>
-        <article class="story-card accent reveal delay-2">
+        <article class="story-card accent tilt reveal delay-2">
           <span class="card-icon">✦</span>
           <p class="tiny-label">THE LITTLE THING</p>
           <h3>Maybe that's the point.</h3>
@@ -66,7 +71,8 @@
         <h2>A few things I want you to know.</h2>
       </div>
       <div class="memory-grid">
-        <div class="memory-frame reveal">
+        <div class="memory-frame tilt reveal">
+          <div class="photo-shine"></div>
           <img class="memory-photo" src="images/sky-adventure.jpg" alt="A favourite Sky adventure memory" loading="eager">
         </div>
         <div class="memory-note reveal delay-1">
@@ -74,12 +80,14 @@
           <p>"The way we spammed emotes onto each other"</p>
           <small>— one of the memories I keep coming back to</small>
         </div>
-        <div class="memory-frame reveal delay-2">
+        <div class="memory-frame tilt reveal delay-2">
+          <div class="photo-shine"></div>
           <img class="memory-photo" src="images/sky-memory.jpg" alt="A favourite Sky memory" loading="lazy">
         </div>
         <div class="memory-note soft reveal delay-3">
           <span>☼</span>
           <p>Some memories don't need a date attached to them to matter.</p>
+          <small>and these are only a couple of them.</small>
         </div>
       </div>
       <p class="replace-note">A few little pieces of Sky that I never want to forget. ♡</p>
@@ -119,8 +127,8 @@
       <p class="final-text reveal delay-2">I don't need a perfect answer. I just wanted you to know what has been living in my head for a while.</p>
       <p class="final-question reveal delay-3">Boss, you may have beaten me in every emote war… but there's one battle I'm still determined to win: your heart. ♡</p>
       <div class="answer-buttons reveal delay-4">
-        <button id="yesBtn" type="button">Yes ♡</button>
-        <button id="hugBtn" type="button">Come here 🫂</button>
+        <button class="magnetic" id="yesBtn" type="button">Yes ♡</button>
+        <button class="magnetic" id="hugBtn" type="button">Come here 🫂</button>
       </div>
       <div class="answer-message" id="answerMessage" aria-live="polite"></div>
     </section>
@@ -128,5 +136,6 @@
 
   <footer id="footer">made with too many feelings & a little bit of Sky magic ♡</footer>
   <script src="script.js"></script>
+  <script src="enhance.js"></script>
 </body>
 </html>
