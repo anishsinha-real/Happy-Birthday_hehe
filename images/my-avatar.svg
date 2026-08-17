@@ -1,13 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 680" role="img" aria-label="Cute chibi avatar standing with hands in pockets"><defs><linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffd9c2"/><stop offset="1" stop-color="#f6b79d"/></linearGradient><linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ead7a8"/><stop offset="1" stop-color="#c9b27d"/></linearGradient><style><![CDATA[
-svg{overflow:visible}.body{transform-box:fill-box;transform-origin:50% 90%;animation:breathe 3.8s ease-in-out infinite}.head{transform-box:fill-box;transform-origin:50% 90%;animation:headFloat 4.2s ease-in-out infinite}.hair{transform-box:fill-box;transform-origin:50% 100%;animation:hairBob 4.2s ease-in-out infinite}.eyes{transform-box:fill-box;transform-origin:50% 50%;animation:blink 5.2s ease-in-out infinite}.armL,.armR{transform-box:fill-box;animation:armSway 4s ease-in-out infinite}.armL{transform-origin:100% 25%}.armR{transform-origin:0 25%;animation-delay:.3s}.lanyard{transform-box:fill-box;transform-origin:50% 0;animation:lanyardSwing 2.7s ease-in-out infinite}.idcard{transform-box:fill-box;transform-origin:50% 0;animation:cardSwing 2.7s ease-in-out infinite}.faceSmile{transform-box:fill-box;transform-origin:50% 50%;animation:smile 6s ease-in-out infinite}.blush{animation:blush 6s ease-in-out infinite}@keyframes breathe{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-3px) scaleY(1.012)}}@keyframes headFloat{0%,100%{transform:rotate(-.5deg) translateY(0)}50%{transform:rotate(.6deg) translateY(-2px)}}@keyframes hairBob{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-2px) rotate(.4deg)}}@keyframes blink{0%,42%,46%,100%{transform:scaleY(1)}44%{transform:scaleY(.08)}}@keyframes armSway{0%,100%{transform:rotate(0)}50%{transform:rotate(1.3deg)}}@keyframes lanyardSwing{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(2deg)}}@keyframes cardSwing{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(2deg)}}@keyframes smile{0%,70%,100%{transform:scaleX(1)}75%{transform:scaleX(1.08)}}@keyframes blush{0%,70%,100%{opacity:.58}76%,84%{opacity:.88}}
-]]></style></defs>
-<g class="sticker" stroke="#fff" stroke-width="28" stroke-linejoin="round" stroke-linecap="round" opacity=".98"><path d="M104 234C88 137 127 63 210 63s122 74 106 171c-4 29-13 56-28 76 14 8 30 26 39 48l27 83-42 22 13 126c2 19-14 31-33 31h-42c-16 0-28-9-31-24l-9-47-9 47c-3 15-15 24-31 24h-42c-19 0-35-12-33-31l13-126-42-22 27-83c9-22 25-40 39-48-15-20-24-47-28-76z" fill="#fff"/></g>
-<g class="body" stroke="#28252b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-<g class="head"><path class="hair" fill="#37353a" d="M103 232c-19-66 2-137 57-169 61-35 148-14 181 41 18 29 22 65 13 100l-29-24 3 45-30-25c-42-18-91-25-134-12l-28 29-19 49c-9-10-12-20-14-34z"/><path fill="url(#skin)" d="M113 221c-7-86 40-142 97-142s104 56 97 142v70c0 79-44 126-97 126s-97-47-97-126z"/><path class="hair" fill="#37353a" d="M111 221c-7-66 14-115 60-140 49-27 112-15 139 23 14 20 20 43 18 69l-31-27-6 38-29-28c-40-14-83-18-124-7l-26 29-1 43z"/><ellipse cx="153" cy="135" rx="17" ry="29" fill="#66646a" stroke="none" transform="rotate(25 153 135)"/><ellipse cx="183" cy="151" rx="9" ry="13" fill="#77757b" stroke="none"/><ellipse cx="285" cy="136" rx="12" ry="27" fill="#66646a" stroke="none"/>
-<g class="eyes"><ellipse cx="157" cy="278" rx="29" ry="37" fill="#28272c"/><ellipse cx="263" cy="278" rx="29" ry="37" fill="#28272c"/><circle cx="147" cy="265" r="10" fill="#fff" stroke="none"/><circle cx="253" cy="265" r="10" fill="#fff" stroke="none"/><circle cx="168" cy="292" r="5" fill="#fff" stroke="none"/><circle cx="274" cy="292" r="5" fill="#fff" stroke="none"/></g>
-<path d="M132 230q25-17 49 0M239 230q24-17 49 0" fill="none"/><circle cx="210" cy="325" r="5" fill="#ef927f" stroke="none"/><path class="faceSmile" d="M188 345q22 20 44 0" fill="none"/><ellipse class="blush" cx="126" cy="327" rx="17" ry="10" fill="#f49d91" stroke="none" opacity=".58"/><ellipse class="blush" cx="294" cy="327" rx="17" ry="10" fill="#f49d91" stroke="none" opacity=".58"/><path fill="url(#skin)" d="M116 278q-29 3-27 35t32 30l9-19-2-42z"/><path fill="url(#skin)" d="M304 278q29 3 27 35t-32 30l-9-19 2-42z"/><path fill="url(#skin)" d="M190 393h40v34h-40z"/></g>
-<path fill="url(#shirt)" d="M150 412q60-31 120 0l37 127q-97 26-194 0z"/><path fill="#efe5c7" d="M178 405l32 49 32-49-32-22z"/>
-<g class="lanyard"><path d="M188 415l22 39 22-39" fill="none" stroke="#2f63a5" stroke-width="7"/><g class="idcard"><path fill="#dce0e7" d="M194 450h32v55h-32z"/></g></g>
-<g class="armL"><path fill="#ead7a8" d="M150 421q-28 20-37 62l23 9 26-54z"/><path d="M117 478q18 7 34 1" fill="none"/><path fill="url(#skin)" d="M136 491q-10 19 4 40 12 16 29-1l-5-32z"/></g><g class="armR"><path fill="#ead7a8" d="M270 421q28 20 37 62l-23 9-26-54z"/><path d="M303 478q-18 7-34 1" fill="none"/><path fill="url(#skin)" d="M284 491q10 19-4 40-12 16-29-1l5-32z"/></g>
-<path fill="#4a4a4d" d="M128 525h77l5 94h-79z"/><path fill="#4a4a4d" d="M215 525h77l-3 94h-79z"/><path fill="#25242a" d="M129 614h80v19q-6 24-45 24-37 0-40-22z"/><path fill="#25242a" d="M211 614h80l5 19q-3 22-40 24-39 0-45-24z"/>
-</g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 700" role="img" aria-label="Cute chibi avatar standing with hands in pockets">
+<defs>
+ <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffd9c2"/><stop offset="1" stop-color="#f6b79d"/></linearGradient>
+ <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ead7a8"/><stop offset="1" stop-color="#cfba82"/></linearGradient>
+ <style><![CDATA[
+ svg{overflow:visible}
+ .whole{transform-box:fill-box;transform-origin:50% 90%;animation:breathe 3.8s ease-in-out infinite}
+ .head{transform-box:fill-box;transform-origin:50% 85%;animation:head 5s ease-in-out infinite}
+ .hair{transform-box:fill-box;transform-origin:50% 100%;animation:hair 4.6s ease-in-out infinite}
+ .eyes{transform-box:fill-box;transform-origin:50% 50%;animation:blink 5.4s ease-in-out infinite}
+ .arms{transform-box:fill-box;transform-origin:50% 20%;animation:arms 4.4s ease-in-out infinite}
+ .lanyard{transform-box:fill-box;transform-origin:50% 0;animation:swing 2.8s ease-in-out infinite}
+ .card{transform-box:fill-box;transform-origin:50% 0;animation:swing 2.8s ease-in-out infinite reverse}
+ .blush{animation:blush 6s ease-in-out infinite}
+ @keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-3px) scale(1.008)}}
+ @keyframes head{0%,100%{transform:rotate(-.5deg) translateY(0)}50%{transform:rotate(.6deg) translateY(-2px)}}
+ @keyframes hair{0%,100%{transform:rotate(-.5deg)}50%{transform:rotate(.7deg) translateY(-1px)}}
+ @keyframes blink{0%,43%,47%,100%{transform:scaleY(1)}45%{transform:scaleY(.06)}}
+ @keyframes arms{0%,100%{transform:rotate(0)}50%{transform:rotate(1deg)}}
+ @keyframes swing{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(2deg)}}
+ @keyframes blush{0%,70%,100%{opacity:.5}76%,84%{opacity:.9}}
+ ]]></style>
+</defs>
+<!-- white sticker outline -->
+<g fill="none" stroke="#fff" stroke-width="30" stroke-linejoin="round" stroke-linecap="round" opacity=".98">
+ <path d="M89 281Q66 238 76 180Q79 88 171 54Q236 29 302 60Q369 91 361 184Q370 237 333 284L325 365Q354 407 333 471L307 525L320 631Q325 665 289 670H241Q220 668 211 647L205 610L198 647Q192 670 168 670H121Q88 665 94 631L107 525L81 471Q60 407 89 365Z"/>
+</g>
+<g class="whole" stroke="#29262c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+ <!-- head -->
+ <g class="head">
+  <path class="hair" fill="#3a383d" d="M93 205Q67 131 111 80Q156 27 226 40Q303 47 337 101Q363 143 346 204L316 178L320 136L291 153Q244 126 194 132L155 158L119 203Z"/>
+  <path fill="url(#skin)" d="M104 190Q103 115 163 83Q211 58 267 84Q321 110 316 191V269Q314 345 210 353Q106 345 104 269Z"/>
+  <path class="hair" fill="#3a383d" d="M101 193Q92 119 143 79Q190 42 250 65Q305 72 331 120Q341 139 338 169L304 148L291 174L260 147Q208 128 163 145L132 175L126 210Z"/>
+  <ellipse cx="149" cy="112" rx="16" ry="27" fill="#67656a" stroke="none" transform="rotate(25 149 112)"/>
+  <ellipse cx="181" cy="128" rx="9" ry="13" fill="#77757b" stroke="none"/>
+  <ellipse cx="286" cy="116" rx="12" ry="26" fill="#66646a" stroke="none"/>
+  <g class="eyes">
+   <ellipse cx="153" cy="232" rx="30" ry="39" fill="#29282d"/>
+   <ellipse cx="267" cy="232" rx="30" ry="39" fill="#29282d"/>
+   <circle cx="143" cy="218" r="10" fill="#fff" stroke="none"/><circle cx="257" cy="218" r="10" fill="#fff" stroke="none"/>
+   <circle cx="164" cy="247" r="5" fill="#fff" stroke="none"/><circle cx="278" cy="247" r="5" fill="#fff" stroke="none"/>
+  </g>
+  <path d="M128 183Q153 166 178 183M242 183Q267 166 292 183" fill="none"/>
+  <circle cx="210" cy="275" r="5" fill="#ef927f" stroke="none"/>
+  <path d="M187 294Q210 315 233 294" fill="none"/>
+  <ellipse class="blush" cx="124" cy="278" rx="18" ry="10" fill="#f49d91" stroke="none"/>
+  <ellipse class="blush" cx="296" cy="278" rx="18" ry="10" fill="#f49d91" stroke="none"/>
+  <path fill="url(#skin)" d="M107 229Q82 233 83 262Q84 291 113 293L126 278L122 238Z"/>
+  <path fill="url(#skin)" d="M313 229Q338 233 337 262Q336 291 307 293L294 278L298 238Z"/>
+ </g>
+ <!-- neck -->
+ <path fill="url(#skin)" d="M191 342H229V378H191Z"/>
+ <!-- shirt/body -->
+ <path fill="url(#shirt)" d="M157 366Q210 341 263 366L296 497Q210 522 124 497Z"/>
+ <!-- collar -->
+ <path fill="#f1e6c9" d="M174 357L210 401L246 357L231 345L210 378L189 345Z"/>
+ <!-- lanyard -->
+ <g class="lanyard"><path d="M188 370L210 407L232 370" fill="none" stroke="#2e65a7" stroke-width="8"/><g class="card"><rect x="194" y="407" width="32" height="57" rx="2" fill="#e2e6ed"/></g></g>
+ <!-- arms with hands in pockets -->
+ <g class="arms">
+  <path fill="url(#shirt)" d="M158 372Q129 389 118 451L145 462L176 408Z"/>
+  <path fill="url(#skin)" d="M143 446Q132 463 145 482Q154 492 169 479L163 448Z"/>
+  <path fill="url(#shirt)" d="M262 372Q291 389 302 451L275 462L244 408Z"/>
+  <path fill="url(#skin)" d="M277 446Q288 463 275 482Q266 492 251 479L257 448Z"/>
+ </g>
+ <!-- trousers -->
+ <path fill="#4b4b4e" d="M127 493H207L211 607H137Z"/>
+ <path fill="#4b4b4e" d="M213 493H293L283 607H209Z"/>
+ <!-- shoes -->
+ <path fill="#26252a" d="M137 600H210V626Q199 646 164 646Q132 644 126 625Z"/>
+ <path fill="#26252a" d="M209 600H283L294 625Q287 644 253 646Q219 646 209 626Z"/>
+</g>
+</svg>
