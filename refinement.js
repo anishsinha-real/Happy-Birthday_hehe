@@ -4,19 +4,19 @@
   style.textContent=`
     .final-slide::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 50% 46%,rgba(255,112,183,.10),transparent 34%);opacity:0;transition:opacity 1.2s ease}
     .final-slide.active::after{opacity:1}
-    .final-question{max-width:720px;margin-left:auto;margin-right:auto;line-height:1.55}
+    .final-question{max-width:820px;margin-left:auto;margin-right:auto;line-height:1.28;font-size:clamp(1.45rem,2.45vw,2rem);padding:0 12px}
     .final-question strong{display:inline-block;position:relative}
-    .final-question strong::after{content:'';position:absolute;left:4%;right:4%;bottom:-5px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .9s .45s ease}
+    .final-question strong::after{content:'';position:absolute;left:4%;right:4%;bottom:-4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .9s .45s ease}
     .final-slide.active .final-question strong::after{transform:scaleX(1)}
-    .final-distance{display:block;margin-top:12px;font-size:.88em;opacity:.72}
-    .final-ask{display:block;margin-top:15px;font-size:.92em;opacity:.88}
+    .final-distance{display:block;margin-top:10px;font-size:.82em;opacity:.72}
+    .final-ask{display:block;margin-top:12px;font-size:.9em;opacity:.88}
     .answer-message{min-height:2.2em}
     .answer-buttons button{transition:transform .35s ease,opacity .35s ease,filter .35s ease,box-shadow .35s ease!important}
     .answer-buttons button:hover{transform:translateY(-4px) scale(1.025)!important}
     .answer-buttons button.chosen{box-shadow:0 12px 45px rgba(255,105,180,.22)!important;transform:translateY(-2px)!important}
     .wish-complete{animation:wishPulse 1.5s ease infinite alternate}
     @keyframes wishPulse{from{box-shadow:0 0 0 rgba(255,105,180,0)}to{box-shadow:0 8px 34px rgba(255,105,180,.14)}}
-    @media(max-width:700px){.final-question{padding:0 7vw}.answer-buttons{gap:10px!important}.answer-buttons button{min-height:50px!important}}
+    @media(max-width:700px){.final-question{padding:0 5vw;font-size:1.32rem;line-height:1.3}.final-distance{font-size:.82em}.final-ask{font-size:.9em;margin-top:9px}.answer-buttons{gap:10px!important}.answer-buttons button{min-height:50px!important}}
   `;
   document.head.appendChild(style);
 
@@ -25,7 +25,7 @@
   if(finalText) finalText.innerHTML='I could have left it at “Happy Birthday.”<br>But there was one thing I didn’t want to leave unsaid.';
 
   const finalQuestion=document.querySelector('.final-question');
-  if(finalQuestion) finalQuestion.innerHTML='Boss, somewhere between all those little moments,<br>I started <strong>falling for you.</strong> ♡<span class="final-distance">I know we’re miles apart. I don’t know what the future looks like.<br>But I know what I feel right now.</span><span class="final-ask">I like you. More than a friend.<br>And if you feel even a little of the same…<br><strong>I’d like to see where this takes us.</strong></span>';
+  if(finalQuestion) finalQuestion.innerHTML='Boss… somewhere along the way,<br>I started <strong>falling for you.</strong> ♡<span class="final-distance">Yes, we’re miles apart. I don’t know what the future looks like.<br>But I know I don’t want to hide how I feel.</span><span class="final-ask"><strong>I like you. More than a friend.</strong><br>If you feel even a little of the same…<br>I’d like to see where this takes us.</span>';
 
   const yes=document.querySelector('#yesBtn');
   const hug=document.querySelector('#hugBtn');
